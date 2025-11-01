@@ -1,0 +1,280 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  left: 0;
+  top: 0;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  background-color: black;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0px 5px 10px rgba(81, 80, 80, 0.615);
+}
+.navbar {
+  border-radius: 50px;
+  padding: 10px;
+}
+.list-header {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+  /* font-size: larger; */
+  margin: 0px 10px;
+}
+.list-header li {
+  margin-right: 15px;
+  padding: 0.2rem;
+}
+.list-header a {
+  text-decoration: none;
+  color: rgb(136, 132, 132);
+  position: relative;
+  padding: 0.3rem 0px;
+}
+.list-header a:hover {
+  color: black;
+}
+.active a {
+  color: black;
+}
+.list-header a::after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 0px;
+  left: 0px;
+  bottom: 0px;
+  background-color: rgb(0, 0, 0);
+  transition: 0.3s ease;
+}
+.list-header a:hover::after {
+  width: 100%;
+}
+.baner-main img {
+  margin-top: 70px;
+  height: 110vh;
+}
+.main {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  padding: 0.5rem 1.5rem;
+}
+.card-shoe-new,
+.card-shoe-hot,
+.main-car-nike-or-adidas {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+.card {
+  margin: 0 auto;
+}
+.card:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.tile-shose-new h2,
+.tile-shose-hot h2,
+.tile-nike-or-adidas h2 {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  position: relative;
+  font-weight: bold;
+}
+.tile-shose-new h2::after,
+.tile-shose-hot h2::after,
+.tile-nike-or-adidas h2::after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blueviolet;
+  border-radius: 50px;
+}
+.main-car-nike-or-adidas img {
+  height: 50vh;
+}
+.card .card-title {
+  text-align: center;
+  font-size: larger;
+}
+.main-car-nike-or-adidas a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin: 0 auto;
+}
+.footer {
+  background: #222;
+  color: #fff;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.footer-brand {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 1rem;
+}
+
+.footer-brand h3 {
+  font-weight: 700;
+  font-size: 1.7rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  color: #ffab40;
+}
+
+.footer-links {
+  flex: 1;
+  min-width: 180px;
+  margin-bottom: 1rem;
+}
+
+.footer-links h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+  color: #ffab40;
+  font-weight: 600;
+}
+
+.footer-links ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links ul li a:hover {
+  color: #ffab40;
+}
+
+.footer-contact {
+  flex: 1.2;
+  min-width: 220px;
+  margin-bottom: 1rem;
+}
+
+.footer-contact h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+  color: #ffab40;
+  font-weight: 600;
+}
+
+.footer-contact p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid #434343;
+  text-align: center;
+  padding: 1rem 0 0.2rem 0;
+  font-size: 0.95rem;
+  margin-top: 0;
+  color: #bbb;
+}
+
+@media (max-width: 500px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .footer-links,
+  .footer-brand,
+  .footer-contact {
+    min-width: 0;
+  }
+  header,
+  .list-header {
+    display: flex;
+    flex-direction: column;
+  }
+  .navbar {
+    border-radius: 0px;
+  }
+  .container {
+    margin-top: 200px;
+  }
+}
+.card-shoes {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: -3px 3px 5px rgb(176, 176, 175);
+  width: 45vh;
+  border-radius: 3px;
+  z-index: 1000;
+  background-color: #fff;
+}
+.tile-and-img img {
+  height: 150px;
+  width: 100%;
+}
+.tile-and-img {
+  display: column;
+  gap: 1rem;
+}
+.price-shoes .price-new {
+  color: red;
+  font-size: xx-large;
+}
+.price-old {
+  color: #bbb;
+}
+.price-old small {
+  top: 0.2px;
+}
+.out-card {
+  position: absolute;
+  right: 0;
+  border: none;
+  padding: 0.3rem;
+}
+.card-body span {
+  color: red;
+  font-size: x-large;
+}
+.price-old span {
+  font-size: large;
+}
