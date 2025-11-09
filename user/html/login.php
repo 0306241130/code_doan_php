@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php session_start(); 
+require_once(__DIR__. "/../../difen_connect_php/connect.php");
+if (isset($_SESSION['USER'])) {
+  header("Location: " . URL);
+  exit();
+}
+?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,30 +37,33 @@
                 <div class="card-3d-wrapper">
                   <div class="card-front">
                     <div class="center-wrap">
-                      <form action="#" method="post">
+                      <form action="../../user/function_login/login_user.php" method="post">
                         <div class="section text-center">
                           <h4 class="mb-4 pb-3">Log In</h4>
                           <div class="form-group">
                             <input
                               type="email"
-                              name="logemail"
+                              name="loginemail"
                               class="form-style"
                               placeholder="Your Email"
-                              id="logemail"
+                              id="loginemail"
                               autocomplete="off"
+                              required
                             />
                             <i class="input-icon uil uil-at"></i>
                           </div>
                           <div class="form-group mt-2">
                             <input
                               type="password"
-                              name="logpass"
+                              name="loginpass"
                               class="form-style"
                               placeholder="Your Password"
-                              id="logpass"
+                              id="loginpass"
                               autocomplete="off"
+                              required
                             />
                             <i class="input-icon uil uil-lock-alt"></i>
+                            <?php if(isset($_SESSION['error_Login'])) echo  $_SESSION['error_Login'] ?>
                           </div>
 
                           <input
@@ -68,7 +78,10 @@
                   </div>
                   <div class="card-back">
                     <div class="center-wrap">
-                      <form action="#" method="post">
+                      <form
+                        action="../../user/function_login/regist_user.php"
+                        method="post"
+                      >
                         <div class="section text-center">
                           <h4 class="mb-4 pb-3">Sign Up</h4>
                           <div class="form-group">
@@ -79,6 +92,7 @@
                               placeholder="Your Full Name"
                               id="logname"
                               autocomplete="off"
+                              required
                             />
                             <i class="input-icon uil uil-user"></i>
                           </div>
@@ -90,6 +104,7 @@
                               placeholder="Your Email"
                               id="logemail"
                               autocomplete="off"
+                              required
                             />
                             <i class="input-icon uil uil-at"></i>
                           </div>
@@ -101,14 +116,16 @@
                               placeholder="Your Password"
                               id="logpass"
                               autocomplete="off"
+                              required
                             />
                             <i class="input-icon uil uil-lock-alt"></i>
                           </div>
                           <input
                             type="submit"
-                            name="login"
+                            name="register"
                             value="Sign Up"
                             class="btn mt-4"
+                            id="register"
                           />
                         </div>
                       </form>
@@ -121,6 +138,40 @@
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Nếu file js không nhận, hãy kiểm tra lại đường dẫn hoặc thứ tự load, thử dùng đường dẫn tuyệt đối để kiểm tra thử -->
+    <!-- <script src="../js/index.js"></script> -->
+     <script>
+  $(document).ready(() => {
+      $("#logemail").on("keyup", function () {
+        $(".alert").remove();
+        let emai = $(this).val();
+        let input = $(this);
+        $.ajax({
+          url: " ../function_login/kiem_tra_regist.php",
+          type: "POST",
+          data: { email: emai },
+          success: function (response) {
+            input.after(response);
+          },
+          error: function (xhr, status, error) {
+            console.log("Lỗi AJAX!", error);
+          },
+        });
+       
+      });
+
+      $("#register").on("click", function(e){
+        if($(".alert").length > 0) {
+          e.preventDefault();
+        }
+      });
+
+    });
+   
+
+     </script>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
