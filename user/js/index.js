@@ -1,44 +1,51 @@
 $(document).ready(function () {
   $(".add-to-card").on("click", function (e) {
     e.preventDefault();
-    $(".card-shoes").toggle();
-    // let masp = $(this).data("masp");
-    // $.ajax({
-    //   url: "card-gio-hang.php",
-    //   type: "POST",
-    //   data: { masp: masp },
-    //   success: function (response) {
-    //     console.log("Server trả về:", response);
-    //     $("body").append(response);
-    //   },
-    //   error: function (xhr, status, error) {
-    //     console.log("Lỗi AJAX!", error);
-    //   },
-    // });
+    $(".card-shoes").remove();
+    let masp = $(this).data("masp");
+    $.ajax({
+      url: "../function_index/card-gio-hang.php",
+      type: "POST",
+      data: { masp: masp },
+      success: function (response) {
+        $("body").append(response);
+      },
+      error: function (xhr, status, error) {
+        console.log("Lỗi AJAX!", error);
+      },
+    });
   });
 });
 
 $(document).ready(() => {
-  $(".out-card").on("click", function (e) {
-    $(".card-shoes").toggle();
+  $(document).on("click", ".out-card", function (e) {
+    $(".card-shoes").remove();
   });
 
-  $(".add-card").on("click", function (e) {
+  let size, color, soLuong;
+  $(document).on("click", ".check-size", function () {
+    size = $(this).val();
+  });
+  $(document).on("click", ".check-color", function () {
+    color = $(this).val();
+  });
+
+  $(document).on("click", ".add-card", function (e) {
     e.preventDefault();
-    // $(".card-shoes").toggle();
-    // let masp = $(this).val();
-    // $.ajax({
-    //   url: "card-gio-hang.php",
-    //   type: "POST",
-    //   data: { masp: masp },
-    //   success: function (response) {
-    //     console.log("Server trả về:", response);
-    //     $("body").append(response);
-    //   },
-    //   error: function (xhr, status, error) {
-    //     console.log("Lỗi AJAX!", error);
-    //   },
-    // });
+    soLuong = $("#quantity").val();
+    masp = $(".add-card").val();
+    $.ajax({
+      url: "../function_gio_hang/add_gio_hang.php",
+      type: "POST",
+      data: { size: size, color: color, soLuong: soLuong, masp: masp },
+      success: function (response) {
+        $(".card-shoes").remove();
+      },
+      error: function (xhr, status, error) {
+        console.log("Loi Ajx", error);
+      },
+    });
+    // $(".card-shoes").remove();
   });
 });
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
+require_once(__DIR__. "/../function_index/render_car.php");
 ?>
 <html lang="en">
   <head>
@@ -30,8 +31,8 @@ session_start();
       >
         <ul class="list-header">
           <li class="active"><a href="">Trang chủ</a></li>
-          <li><a href="giohang.html">Giỏ hàng</a></li>
-          <li><a href="donhang.html">Đơn hàng</a></li>
+          <li><a href="giohang.php">Giỏ hàng</a></li>
+          <li><a href="donhang.php">Đơn hàng</a></li>
           <?php if(isset($_SESSION['USER'])){
               echo '<li><a href="../function_login/logout.php">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
             }else{
@@ -84,118 +85,7 @@ session_start();
           <h2>Sản Phẩm Mới</h2>
         </div>
         <div class="card-shoe-new">
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <strong class="price-old"
-                ><s>3,000,000₫</s> <span>-10%</span></strong
-              >
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html?" class="btn btn-outline-success pull-right">
-                  Buy
-                </a>
-                <a
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <strong class="price-old"
-                ><s>3,000,000₫</s> <span>-10%</span></strong
-              >
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <strong class="price-old"
-                ><s>3,000,000₫</s><span>-10%</span></strong
-              >
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+          <?php render_card_new() ?>
         </div>
       </section>
       <section class="shoe-hot">
@@ -203,114 +93,7 @@ session_start();
           <h2>Sản Phẩm Hot</h2>
         </div>
         <div class="card-shoe-hot">
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike7.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/Nike2.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <strong class="price-old"
-                ><s>3,000,000₫</s> <span>-10%</span></strong
-              >
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/adidas1.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/adidas3.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <strong class="price-old"
-                ><s>3,000,000₫</s> <span>-10%</span></strong
-              >
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem">
-            <img src="../img/adidas3.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text fw-bold">Nike Dunk Low Next Nature</p>
-              <span class="fw-bold">2,929,000₫</span><br />
-              <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html" class="btn btn-outline-success"> Buy </a>
-                <a
-                  href="#"
-                  data-masp="1"
-                  class="btn btn-danger pull-right fw-bold ms-1 add-to-card add-to-card"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+        <?php render_card_hot() ?>
         </div>
       </section>
       <section class="nike-or-adidas">
@@ -318,7 +101,7 @@ session_start();
           <h2>Danh mục sản phẩm</h2>
         </div>
         <div class="main-car-nike-or-adidas">
-          <a href="Nike.html">
+          <a href="Nike.php">
             <div class="card">
               <h5 class="card-title fs-3">Nike</h5>
               <img
@@ -328,7 +111,7 @@ session_start();
               />
             </div>
           </a>
-          <a href="adidas.html">
+          <a href="adidas.php">
             <div class="card">
               <h5 class="card-title fs-3">Adidas</h5>
               <img
@@ -341,113 +124,7 @@ session_start();
         </div>
       </section>
     </div>
-    <div class="card-shoes pb-2">
-      <div class="tile-and-img">
-        <button class="out-card" type="submit">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <img src="../img/adidas2.jpg" alt="" />
-        <article class="price-shoes px-2" style="position: relative">
-          <strong style="position: relative" class="price-new"
-            >900.000<small style="position: absolute">đ</small></strong
-          ><br />
-          <strong style="position: relative" class="price-old"
-            ><s>1.000.000 </s
-            ><small style="position: absolute"><s>đ</s></small>
-            <span class="text-danger ms-3">-10%</span></strong
-          >
-        </article>
-      </div>
-      <form action="#" method="get" class="px-2">
-        <div class="d-flex gap-2">
-          <label for="size" class="form-label">Size</label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="Size"
-            id="size-39"
-            autocomplete="off"
-            value="39"
-            required
-          />
-          <label class="btn btn-outline-success" for="size-39">size 39</label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="Size"
-            id="size-40"
-            autocomplete="off"
-            value="40"
-            required
-          />
-          <label class="btn btn-outline-success" for="size-40">size 40</label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="Size"
-            id="size-41"
-            autocomplete="off"
-            value="41"
-            required
-          />
-          <label class="btn btn-outline-success" for="size-41">size 41</label>
-        </div>
-        <div class="d-flex gap-2 mt-2">
-          <label for="color" class="form-label">Color</label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="color"
-            id="do"
-            autocomplete="off"
-            value="Đỏ"
-            required
-          />
-          <label class="btn btn-outline-danger" for="do">Đỏ</label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="color"
-            id="xanh"
-            autocomplete="off"
-            value="Xanh"
-            required
-          />
-          <label class="btn btn-outline-success" for="xanh">Xanh</label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="color"
-            id="vang"
-            autocomplete="off"
-            value="Vàng"
-            required
-          />
-          <label class="btn btn-outline-warning" for="vang">Vàng</label>
-        </div>
-        <input
-          type="number"
-          name="quantity"
-          id="quantity"
-          placeholder="Số lượng"
-          class="form-control mt-2"
-          min="1"
-          max="10"
-          required
-        />
-        <div class="d-grid gap-2">
-          <button
-            class="btn btn-danger mt-2 add-card"
-            type="submit"
-            name="gio-hang"
-            value="masp01"
-          >
-            <i class="fa fa-shopping-cart"></i>
-          </button>
-        </div>
-      </form>
-    </div>
-    <footer class="footer">
+       <footer class="footer">
       <div class="footer-content">
         <div class="footer-brand">
           <h3>NTN SHOES</h3>

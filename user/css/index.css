@@ -236,7 +236,7 @@ header {
   }
 }
 .card-shoes {
-  display: none;
+  display: block;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -248,7 +248,7 @@ header {
   background-color: #fff;
 }
 .tile-and-img img {
-  height: 150px;
+  height: 200px;
   width: 100%;
 }
 .tile-and-img {

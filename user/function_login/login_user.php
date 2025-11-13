@@ -13,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])){
             session_unset();
             if(password_verify($passWord, $passUser['mat_khau_hash'])){
                 $user=$passUser['ho_ten'] ;
+                $makh=$passUser['ma_nguoi_dung'];
                 $_SESSION['USER']=$user;
+                $_SESSION['MA_USER']=$makh;
                 header("Location: ".URL);
                 exit;
             }else{
