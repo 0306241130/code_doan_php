@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,8 +13,7 @@
     />
     <link
       rel="stylesheet"
-      type="text/css"
-      href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../css/index.css" />
   </head>
@@ -26,10 +28,15 @@
         data-bs-theme="light"
       >
         <ul class="list-header">
-          <li><a href="index.html">Trang chủ</a></li>
-          <li><a href="giohang.html">Giỏ hàng</a></li>
-          <li class="active"><a href="donhang.html">Đơn hàng</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a href="index.php">Trang chủ</a></li>
+          <li><a href="giohang.php">Giỏ hàng</a></li>
+          <li class="active"><a href="donhang.php">Đơn hàng</a></li>
+          <?php if(isset($_SESSION['USER'])){
+              echo '<li ><a href="../function_login/logout.php" id="user">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
+            }else{
+           echo '<li><a href="login.php"> Login<i class="fa fa-sign-in-alt"></i></a></li>';
+          } 
+          ?>
         </ul>
       </nav>
     </header>
