@@ -34,7 +34,7 @@ require_once(__DIR__. "/../function_index/render_car.php");
           <li><a href="giohang.php">Giỏ hàng</a></li>
           <li><a href="donhang.php">Đơn hàng</a></li>
           <?php if(isset($_SESSION['USER'])){
-              echo '<li id="user"><a href="../function_login/logout.php" id="user">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
+              echo '<li ><a href="../function_login/logout.php" id="user">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
             }else{
            echo '<li><a href="login.php"> Login<i class="fa fa-sign-in-alt"></i></a></li>';
           } 

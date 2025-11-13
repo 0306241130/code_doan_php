@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             id="size-'.$row1['size'].'"
             autocomplete="off"
             value="'.$row1['size'].'"
-            required
+           
           />
           <label class="btn btn-outline-success" for="size-'.$row1['size'].'">size '.$row1['size'].'</label>';
     }
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             id="'.$row2['mau_sac'].'"
             autocomplete="off"
             value="'.$row2['mau_sac'].'"
-            required
+           
           />
           <label class="btn btn-outline-success" for="'.$row2['mau_sac'].'">'.$row2['mau_sac'].'</label>';
    }
@@ -69,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           placeholder="Số lượng"
           class="form-control mt-2"
           min="1"
-          max="10"
           value="1"
         />
         <div class="d-grid gap-2">

@@ -248,7 +248,6 @@ if(!isset($_SESSION['USER'])){
                   name="quantity"
                   required
                   min="1"
-                  max="10"
                   value="1"
                 />
               </div>
