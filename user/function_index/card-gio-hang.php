@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </strong>
         </article>
       </div>
-      <form action="#" method="get" class="px-2">
+      <form action="../function_gio_hang/add_gio_hang.php" method="get" class="px-2">
         <div class="d-flex gap-2">
           '.$size.'
         </div>

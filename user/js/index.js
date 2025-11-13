@@ -31,7 +31,9 @@ $(document).ready(() => {
   });
 
   $(document).on("click", ".add-card", function (e) {
-    e.preventDefault();
+    if ($("#user").length > 0) {
+      e.preventDefault();
+    }
     soLuong = $("#quantity").val();
     masp = $(".add-card").val();
     $.ajax({
@@ -45,7 +47,6 @@ $(document).ready(() => {
         console.log("Loi Ajx", error);
       },
     });
-    // $(".card-shoes").remove();
   });
 });
 

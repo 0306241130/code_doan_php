@@ -16,7 +16,7 @@ function render_card_new(){
                 ><s>'.number_format( $row['gia_ban'],0,"").'₫</s> <span>-'.$row['giam_gia'].'%</span></strong
               >
               <div class="d-flex gap-2 coulmn-6 mx-auto">
-                <a href="buy.html?" class="btn btn-outline-success pull-right">
+                <a href="buy.php?masp='.$row['ma_san_pham'].'" class="btn btn-outline-success pull-right">
                   Buy
                 </a>
                 <a
