@@ -30,11 +30,11 @@ require_once(__DIR__. "/../function_index/render_car.php");
         data-bs-theme="light"
       >
         <ul class="list-header">
-          <li class="active"><a href="">Trang chủ</a></li>
+          <li class="active"><a href="index.php">Trang chủ</a></li>
           <li><a href="giohang.php">Giỏ hàng</a></li>
           <li><a href="donhang.php">Đơn hàng</a></li>
           <?php if(isset($_SESSION['USER'])){
-              echo '<li id="user"><a href="../function_login/logout.php">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
+              echo '<li id="user"><a href="../function_login/logout.php" id="user">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
             }else{
            echo '<li><a href="login.php"> Login<i class="fa fa-sign-in-alt"></i></a></li>';
           } 

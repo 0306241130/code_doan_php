@@ -18,35 +18,40 @@ $(document).ready(function () {
 });
 
 $(document).ready(() => {
-  $(document).on("click", ".out-card", function (e) {
+  $(document).on("click", ".out-card", function () {
     $(".card-shoes").remove();
   });
 
-  let size, color, soLuong;
-  $(document).on("click", ".check-size", function () {
-    size = $(this).val();
-  });
-  $(document).on("click", ".check-color", function () {
-    color = $(this).val();
-  });
-
+  // Sử dụng biến toàn cục hoặc cập nhật trực tiếp khi submit
   $(document).on("click", ".add-card", function (e) {
+    // Luôn luôn ngăn submit mặc định để tránh gửi GET
+    // Chỉ ngăn submit mặc định nếu đã đăng nhập
     if ($("#user").length > 0) {
       e.preventDefault();
+      // Lấy size, color đúng từ radio đang chọn
+      const size = $("input.check-size:checked").val();
+      const color = $("input.check-color:checked").val();
+      const soLuong = $("#quantity").val();
+      const masp = $(this).val();
+
+      if (!size || !color || !soLuong || !masp) {
+        alert("Vui lòng chọn size, màu sắc và số lượng hợp lệ.");
+        return;
+      }
+
+      // Gửi AJAX POST
+      $.ajax({
+        url: "../function_gio_hang/add_gio_hang.php",
+        type: "POST",
+        data: { size: size, color: color, soLuong: soLuong, masp: masp },
+        success: function (response) {
+          $(".card-shoes").remove();
+        },
+        error: function (xhr, status, error) {
+          alert("Lỗi AJAX: " + error);
+        },
+      });
     }
-    soLuong = $("#quantity").val();
-    masp = $(".add-card").val();
-    $.ajax({
-      url: "../function_gio_hang/add_gio_hang.php",
-      type: "POST",
-      data: { size: size, color: color, soLuong: soLuong, masp: masp },
-      success: function (response) {
-        $(".card-shoes").remove();
-      },
-      error: function (xhr, status, error) {
-        console.log("Loi Ajx", error);
-      },
-    });
   });
 });
 
