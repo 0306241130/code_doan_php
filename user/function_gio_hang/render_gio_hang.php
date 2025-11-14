@@ -67,7 +67,7 @@ function render_Gio_Hang(){
                                     </span>
                                 </h4>
                             </div>
-                            <a href="buy.php" class="btn btn-primary pull-right">
+                            <a href="buyGioHang.php" class="btn btn-primary pull-right">
                                 Đặt hàng
                                 <span class="glyphicon glyphicon-chevron-right"></span>
                             </a>

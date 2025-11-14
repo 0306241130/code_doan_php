@@ -9,8 +9,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"&&isset($_POST['Buy'])){
     if(isset($_POST['Size']))$size=$_POST['Size'];
     if(isset($_POST['Color']))$color=$_POST['Color'];
     if(isset($_POST['payment-method']))$thanh_Toan=$_POST['payment-method'];
-    if(isset($_POST['quantity']))$so_Luong=$_POST['quantity'];
     if(isset($_POST['Buy']))$masp=$_POST['Buy'];
+    $so_Luong=1;
     $phi_van_chuyen = 10000.0;
     $sql = "INSERT INTO don_hang(ma_nguoi_dung, phi_van_chuyen, dia_chi_giao_hang) ";
     $sql .= "VALUES (" . $_SESSION['MA_USER'] . ",".$phi_van_chuyen.",  '" . $dia_Chi . "')";

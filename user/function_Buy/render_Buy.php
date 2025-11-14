@@ -107,7 +107,7 @@ function table_Buy(){
 
 function from_Buy(){
     global $masp;
-    echo '<form action="../function_Buy/dat_hang.php" method="post">;
+    echo '<form action="../function_Buy/dat_hang.php" method="post">
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"
                   >Tên người nhận</label
@@ -154,19 +154,6 @@ function from_Buy(){
                 <div class="d-flex gap-2">
                 '.render_Mau().'
                  </div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Số lượng</label
-                >
-                <input
-                  type="number"
-                  class="form-control"
-                  name="quantity"
-                  required
-                  min="1"
-                  value="1"
-                />
               </div>
               <div class="mb-3">
                <label for="payment-method" class="form-label"
