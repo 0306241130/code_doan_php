@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
+require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
+require_once(__DIR__ . "/../fuction_don_hang/cho_xac_nhan.php");
 ?>
 <html lang="en">
   <head>
@@ -20,21 +22,21 @@ session_start();
   <body class="bg-light">
     <header>
       <div class="tile-header">
-        <h1>NTN SHOE</h1>
+        <i class="fas fa-shoe-prints" style="font-size: 1.5rem; color: #fff;"></i>
+        <h1>NTN SHOES</h1>
       </div>
-      <nav
-        class="navbar"
-        style="background-color: #e3f2fd"
-        data-bs-theme="light"
-      >
+      <nav class="navbar">
         <ul class="list-header">
-          <li><a href="index.php">Trang chủ</a></li>
-          <li><a href="giohang.php">Giỏ hàng</a></li>
-          <li class="active"><a href="donhang.php">Đơn hàng</a></li>
+          <li><a href="index.php"><i class="fas fa-home"></i> Trang chủ</a></li>
+          <li class="position-relative">
+            <a href="giohang.php"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
+           <?php  dem(); ?>
+          </li>
+          <li class="active"><a href="donhang.php"><i class="fas fa-box"></i> Đơn hàng</a></li>
           <?php if(isset($_SESSION['USER'])){
-              echo '<li ><a href="../function_login/logout.php" id="user">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
+              echo '<li><a href="../function_login/logout.php" id="user"><i class="fas fa-user-circle"></i> '.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i></a></li>';
             }else{
-           echo '<li><a href="login.php"> Login<i class="fa fa-sign-in-alt"></i></a></li>';
+           echo '<li><a href="login.php"><i class="fas fa-sign-in-alt"></i> Login</a></li>';
           } 
           ?>
         </ul>
@@ -89,45 +91,24 @@ session_start();
       </div>
 
       <div class="cho-xac-nhan">
-        <!-- <div class="panel-body">
+        <div class="panel-body p-4 bg-white rounded shadow">
           <div class="table-responsive">
-            <table class="table">
-              <thead>
+            <table class="table align-middle table-hover table-bordered mb-0">
+              <thead class="table-primary">
                 <tr>
-                  <th>Sản phẩm</th>
-                  <th>Tên sản phẩm</th>
-                  <th>Số lượng</th>
-                  <th>Giá tiền</th>
+                  <th class="text-center" style="width:170px;">Sản phẩm</th>
+                  <th class="text-center">Tên sản phẩm</th>
+                  <th class="text-center" style="width:120px;">Số lượng</th>
+                  <th class="text-center" style="width:160px;">Giá tiền</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <img
-                      src="../img/adidas3.jpg"
-                      class="img-cart"
-                      style="width: 400px; height: 200px"
-                    />
-                  </td>
-                  <td>
-                    <strong>Nike Dunk Low Next Nature</strong>
-                    <p>Size : 26</p>
-                  </td>
-                  <td>
-                    <article>
-                      <p>1</p>
-                      <a href="#" class="btn btn-primary">Hủy </a>
-                    </article>
-                  </td>
-                  <td style="position: relative">
-                    350.000<small style="position: absolute; top: 0">đ</small>
-                  </td>
-                </tr>
+                  <?php choXacNhan(); ?>
               </tbody>
             </table>
           </div>
-        </div> -->
-        <h1 class="text-danger">Chưa có đơn hàng</h1>
+        </div>
+       
       </div>
       <div class="cho-lay-hang">
         <h1 class="text-danger">Chưa có đơn hàng</h1>

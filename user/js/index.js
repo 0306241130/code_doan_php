@@ -28,6 +28,7 @@ $(document).ready(() => {
     // Chỉ ngăn submit mặc định nếu đã đăng nhập
     if ($("#user").length > 0) {
       e.preventDefault();
+
       // Lấy size, color đúng từ radio đang chọn
       const size = $("input.check-size:checked").val();
       const color = $("input.check-color:checked").val();
@@ -46,6 +47,9 @@ $(document).ready(() => {
         data: { size: size, color: color, soLuong: soLuong, masp: masp },
         success: function (response) {
           $(".card-shoes").remove();
+          localStorage.setItem("scrollPos", window.scrollY);
+          // Reload trang
+          location.reload();
         },
         error: function (xhr, status, error) {
           alert("Lỗi AJAX: " + error);

@@ -7,19 +7,22 @@ function render_Size($con,$Size){
     $result1=mysqli_query($con,"SELECT * FROM size_san_pham WHERE ma_san_pham=".$masp."");
     $size="";
     while($row1=mysqli_fetch_assoc($result1)){
-        $size.='<input
-                    type="radio"
-                    class="btn-check"
-                    name="Size"
-                    id="size-'.$row1['size'].'"
-                    autocomplete="off"
-                    value="'.$row1['size'].'"
-                    required
-                  '.(($row1['size'] == $Size) ? 'checked' : '').'
-                  />
-                  <label class="btn btn-outline-success" for="size-'.$row1['size'].'"
-                    >size '.$row1['size'].'</label
-                  >';
+        // Cải thiện class cho đẹp hơn với Bootstrap và bố cục flex
+        $size.='<div class="form-check form-check-inline p-0 m-0">
+                    <input
+                        type="radio"
+                        class="btn-check"
+                        name="Size"
+                        id="size-'.$row1['size'].'"
+                        autocomplete="off"
+                        value="'.$row1['size'].'"
+                        required
+                        '.(($row1['size'] == $Size) ? 'checked' : '').'
+                    />
+                    <label class="btn btn-outline-primary btn-sm mx-1" for="size-'.$row1['size'].'"
+                        style="min-width:48px;font-weight:500;"
+                    >'.$row1['size'].'</label>
+                </div>';
     }
     return $size;
 }
@@ -28,19 +31,21 @@ function render_Mau($con,$Color){
     $result2=mysqli_query($con,"SELECT * FROM mau_san_pham WHERE ma_san_pham=".$masp."");
     $mau="";
     while($row2=mysqli_fetch_assoc($result2)){
-        $mau.='  <input
-                    type="radio"
-                    class="btn-check"
-                    name="Color"
-                    id="color-'.$row2['mau_sac'].'"
-                    autocomplete="off"
-                    value="'.$row2['mau_sac'].'"
-                    required
-                    '.(($row2['mau_sac'] == $Color) ? 'checked' : '').'
-                  />
-                  <label class="btn btn-outline-success" for="color-'.$row2['mau_sac'].'"
-                    >'.$row2['mau_sac'].'</label
-                  >';
+        $mau.='<div class="form-check form-check-inline p-0 m-0">
+                    <input
+                        type="radio"
+                        class="btn-check"
+                        name="Color"
+                        id="color-'.$row2['mau_sac'].'"
+                        autocomplete="off"
+                        value="'.$row2['mau_sac'].'"
+                        required
+                        '.(($row2['mau_sac'] == $Color) ? 'checked' : '').'
+                    />
+                    <label class="btn btn-outline-warning btn-sm mx-1 text-capitalize" for="color-'.$row2['mau_sac'].'"
+                        style="min-width:70px;font-weight:500;"
+                    >'.$row2['mau_sac'].'</label>
+              </div>';
     }
     return $mau;
 }
@@ -50,44 +55,40 @@ function sua_gio_hang(){
     $con=connect();
     $result=mysqli_query($con,"SELECT * FROM gio_hang WHERE ma_san_pham=".$masp." AND ma_nguoi_dung=".$_SESSION['MA_USER']."");
     $row=mysqli_fetch_assoc($result);
-    echo ' <form action="../function_gio_hang/update_gio_hang.php" method="POST">
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Size</label
-                >
-                <div class="d-flex gap-2">
+    echo ' <form action="../function_gio_hang/update_gio_hang.php" method="POST" class="p-4 bg-light rounded shadow">
+              <div class="mb-4">
+                <label class="form-label fw-bold text-secondary">Size</label>
+                <div class="d-flex flex-wrap gap-2">
                   '.render_Size($con,$row['kich_co']).'
+                </div>
               </div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Color</label
-                >
-                <div class="d-flex gap-2">
+              <div class="mb-4">
+                <label class="form-label fw-bold text-secondary">Color</label>
+                <div class="d-flex flex-wrap gap-2">
                     '.render_Mau($con,$row['mau_sac']).'
                 </div>
               </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Số lượng</label
-                >
+              <div class="mb-4">
+                <label class="form-label fw-bold text-secondary">Số lượng</label>
                 <input
                   type="number"
-                  class="form-control"
+                  class="form-control w-50 border-info"
                   name="quantity"
                   required
                   min="1"
                   value="'.$row['so_luong'].'"
                 />
               </div>
-              <button
-                type="submit"
-                class="btn btn-success pull-right fw-bold mt-2"
-                name="edit_card"
-                value='.$masp.'
-              >
-                Xác nhận
-              </button>
+              <div class="d-flex justify-content-end">
+                <button
+                  type="submit"
+                  class="btn btn-success px-4 fw-bold"
+                  name="edit_card"
+                  value="'.$masp.'"
+                >
+                  Xác nhận
+                </button>
+              </div>
             </form>';
 }
 function sua_gio_hang1 (){
@@ -96,34 +97,37 @@ function sua_gio_hang1 (){
     $con=connect();
     $result=mysqli_query($con,"SELECT * FROM gio_hang WHERE ma_san_pham=".$masp." AND ma_nguoi_dung=".$_SESSION['MA_USER']."");
     $row3=mysqli_fetch_assoc($result);
-    echo '<table class="table">
-                    <thead>
-                      <tr>
-                        <th>Sản phẩm</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Giá tiền</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <img
+    echo '<table class="table table-bordered table-hover align-middle shadow rounded bg-white">
+            <thead class="table-info text-center">
+                <tr>
+                    <th style="width: 200px;">Sản phẩm</th>
+                    <th style="width: 270px;">Tên sản phẩm</th>
+                    <th style="width: 150px;">Giá tiền</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr>
+                    <td>
+                        <img
                             src="../img/'.$row3['ten_san_pham'].'.jpg"
-                            class="img-cart"
-                            style="width: 400px; height: 200px"
-                          />
-                        </td>
-                        <td>
-                          <strong>'.$row3['ten_san_pham'].'</strong>
-                        </td>
-                        <td style="position: relative">
-                        '.number_format($row3['gia'],0,"",".").'<small style="position: absolute; top: 0"
-                            >đ</small
-                          >
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>';
+                            class="img-fluid rounded shadow border border-2"
+                            style="width: 200px; height: 120px; object-fit:cover;"
+                        />
+                    </td>
+                    <td class="align-middle">
+                        <strong class="text-primary fs-5">'.$row3['ten_san_pham'].'</strong>
+                    </td>
+                    <td class="align-middle" style="position: relative">
+                        <span class="fw-bold text-danger fs-5">'
+                            .number_format($row3['gia'],0,"",".").'
+                            <small style="font-size:15px;position: relative; top: -3px"
+                                >đ</small
+                            >
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+          </table>';
 }
 
 ?>

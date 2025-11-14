@@ -11,53 +11,151 @@ header {
   width: 100%;
   left: 0;
   top: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 2rem;
   z-index: 1000;
-  background-color: black;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   color: white;
   font-weight: 700;
-  box-shadow: 0px 5px 10px rgba(81, 80, 80, 0.615);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
+
+.tile-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tile-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.tile-header h1:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
 .navbar {
   border-radius: 50px;
-  padding: 10px;
+  padding: 0.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
+
 .list-header {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 0;
   list-style: none;
-  /* font-size: larger; */
-  margin: 0px 10px;
+  margin: 0;
+  align-items: center;
 }
+
 .list-header li {
-  margin-right: 15px;
-  padding: 0.2rem;
+  margin: 0;
+  padding: 0;
 }
+
 .list-header a {
   text-decoration: none;
-  color: rgb(136, 132, 132);
+  color: #666;
   position: relative;
-  padding: 0.3rem 0px;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
+
+.list-header a i {
+  font-size: 0.9rem;
+}
+
 .list-header a:hover {
-  color: black;
+  color: #000;
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
 }
+
 .active a {
-  color: black;
+  color: #000;
+  background: rgba(0, 0, 0, 0.08);
+  font-weight: 700;
 }
+
 .list-header a::after {
   position: absolute;
   content: "";
-  height: 3px;
+  height: 2px;
   width: 0px;
-  left: 0px;
-  bottom: 0px;
-  background-color: rgb(0, 0, 0);
-  transition: 0.3s ease;
+  left: 50%;
+  bottom: 0.3rem;
+  background: linear-gradient(90deg, #000 0%, #333 100%);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
+
 .list-header a:hover::after {
-  width: 100%;
+  width: 60%;
+}
+
+.active a::after {
+  width: 60%;
+}
+
+#user {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+#user:hover {
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, 0.1);
+}
+
+#user i {
+  margin-left: 0.3rem;
+}
+
+/* Badge giỏ hàng */
+.position-relative .badge {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 700;
+  animation: pulse 2s infinite;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* Cải thiện responsive cho badge */
+@media (max-width: 500px) {
+  .position-relative .badge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
 }
 .baner-main img {
   margin-top: 70px;
@@ -210,6 +308,39 @@ header {
   color: #bbb;
 }
 
+@media (max-width: 768px) {
+  header {
+    padding: 0.6rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tile-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .navbar {
+    width: 100%;
+    margin-top: 0.5rem;
+    border-radius: 25px;
+    padding: 0.4rem 1rem;
+  }
+
+  .list-header {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    justify-content: center;
+  }
+
+  .list-header a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .list-header a i {
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 500px) {
   .footer-content {
     flex-direction: column;
@@ -223,14 +354,53 @@ header {
   .footer-contact {
     min-width: 0;
   }
-  header,
-  .list-header {
-    display: flex;
+
+  header {
+    padding: 0.5rem 0.8rem;
     flex-direction: column;
+    align-items: flex-start;
   }
+
+  .tile-header {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .tile-header h1 {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+
   .navbar {
-    border-radius: 0px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
   }
+
+  .list-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .list-header li {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .list-header a {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .list-header a i {
+    font-size: 0.7rem;
+  }
+
   .container {
     margin-top: 200px;
   }

@@ -1,3 +1,5 @@
+
+
 <?php
 session_start();
 require_once(__DIR__. "/../../difen_connect_php/connect.php");
@@ -10,10 +12,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"&&isset($_POST['Buy'])){
     if(isset($_POST['Color']))$color=$_POST['Color'];
     if(isset($_POST['payment-method']))$thanh_Toan=$_POST['payment-method'];
     if(isset($_POST['Buy']))$masp=$_POST['Buy'];
+    $reslut=mysqli_query($con,"SELECT MAX(IFNULL(ma_thanh_toan,0)) AS ma_thanh_toan FROM thanh_toan");
+    $row=mysqli_fetch_assoc($reslut);
+    $ma_thanh_toan=$row['ma_thanh_toan']+1;
+
+    $reslut1=mysqli_query($con,"SELECT MAX(IFNULL(ma_don_hang,0)) AS ma_don_hang FROM don_hang");
+    $row1=mysqli_fetch_assoc($reslut1);
+    $ma_don_hang=$row1['ma_don_hang']+1;
+
     $so_Luong=1;
     $phi_van_chuyen = 10000.0;
-    $sql = "INSERT INTO don_hang(ma_nguoi_dung, phi_van_chuyen, dia_chi_giao_hang) ";
-    $sql .= "VALUES (" . $_SESSION['MA_USER'] . ",".$phi_van_chuyen.",  '" . $dia_Chi . "')";
+    $sql = "INSERT INTO don_hang(ma_don_hang,ma_nguoi_dung, phi_van_chuyen, dia_chi_giao_hang) ";
+    $sql .= "VALUES (" .$ma_don_hang. "," . $_SESSION['MA_USER'] . ",".$phi_van_chuyen.",  '" . $dia_Chi . "')";
     mysqli_query($con,$sql); 
 
     $query_giam_gia = "SELECT gia_ban*(1-IFNULL(giam_gia,0)/100) AS giam_gia FROM san_pham WHERE ma_san_pham = '".$masp."'";
@@ -21,17 +31,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"&&isset($_POST['Buy'])){
     $row_giam_gia = mysqli_fetch_assoc($result_giam_gia);
     $gia_san_pham=$row_giam_gia['giam_gia'];
 
-    $sql="INSERT INTO thanh_toan(phuong_thuc_thanh_toan,trang_thai_thanh_toan,so_tien_can_thanh_toan) ";
-    $sql.= "VALUES('".$thanh_Toan."','chưa thanh toán',".$gia_san_pham.")";
+    $sql="INSERT INTO thanh_toan(ma_thanh_toan,phuong_thuc_thanh_toan,trang_thai_thanh_toan,so_tien_can_thanh_toan) ";
+    $sql.= "VALUES(" .$ma_thanh_toan. ",'".$thanh_Toan."','chưa thanh toán',".$gia_san_pham.")";
     mysqli_query($con,$sql);
 
-    $reslut=mysqli_query($con,"SELECT MAX(ma_thanh_toan) AS ma_thanh_toan FROM thanh_toan");
-    $row=mysqli_fetch_assoc($reslut);
-    $ma_thanh_toan=$row['ma_thanh_toan'];
-
-    $reslut1=mysqli_query($con,"SELECT MAX(ma_don_hang) AS ma_don_hang FROM don_hang");
-    $row1=mysqli_fetch_assoc($reslut1);
-    $ma_don_hang=$row1['ma_don_hang'];
+   
 
     // Truy vấn lấy tên và giá sản phẩm dựa trên mã sản phẩm
     $query_ten_san_pham = "SELECT ten_san_pham,gia_ban*(1-IFNULL(giam_gia,0)/100) AS giam_gia FROM san_pham WHERE ma_san_pham = '".$masp."'";
@@ -40,10 +44,26 @@ if($_SERVER["REQUEST_METHOD"]=="POST"&&isset($_POST['Buy'])){
     $ten_san_pham = $row_ten_san_pham['ten_san_pham'];
     $gia_san_pham=$row_ten_san_pham['giam_gia'];
 
-    $sql="INSERT INTO chi_tiet_don_hang(ma_thanh_toan, ma_don_hang, ma_san_pham, tensp, kich_co, mau_sac, so_luong, gia, trang_thai) VALUES(".$ma_thanh_toan.",".$ma_don_hang.",".$masp.",'".$ten_san_pham."',".$size.",'".$color."',".$so_Luong.",'".$gia_san_pham."','chờ xác nhận')";
+    $result2=mysqli_query($con,"SELECT MAX(IFNULL(ma_chi_tiet,0)) AS ma_chi_tiet FROM chi_tiet_don_hang");
+    $row2=mysqli_fetch_assoc($result2);
+    $chi_tiet_don_hang=$row2['ma_chi_tiet']+1;
+
+    $sql="INSERT INTO chi_tiet_don_hang(ma_chi_tiet,ma_thanh_toan, ma_don_hang, ma_san_pham, tensp, kich_co, mau_sac, so_luong, gia, trang_thai) VALUES(".$chi_tiet_don_hang.",".$ma_thanh_toan.",".$ma_don_hang.",".$masp.",'".$ten_san_pham."',".$size.",'".$color."',".$so_Luong.",'".$gia_san_pham."','chờ xác nhận')";
     mysqli_query($con,$sql);
 
-  
+    $reslut3=mysqli_query($con,"SELECT MAX(IFNULL(ma_yeu_cau,0)) AS ma_yeu_cau FROM yeu_cau_khach_hang");
+    $row3=mysqli_fetch_assoc($reslut3);
+    $ma_yeu_cau=$row3['ma_yeu_cau']+1;
+    $yeu_cau="xác nhận đơn hàng";
+   
+    mysqli_query($con, "INSERT INTO yeu_cau_khach_hang VALUES(" . $ma_yeu_cau . ", " . $chi_tiet_don_hang . ", " . $ma_don_hang . ", CURRENT_TIMESTAMP(),'".$yeu_cau."')");
+    
+    $reslut4=mysqli_query($con,"SELECT MAX(IFNULL(ma_trang_thai,0)) AS ma_trang_thai FROM trang_thai_don_hang");
+    $row4=mysqli_fetch_assoc($reslut4);
+    $ma_trang_thai=$row['ma_trang_thai']+1;
+    $trangThai="xác nhận";
+    mysqli_query($con,"INSERT INTO trang_thai_don_hang (ma_don_hang,cho_xac_nhan,ma_trang_thai) VALUES(".$ma_don_hang.",'".$trangThai."',".$ma_trang_thai.")");
+
 
     header("Location: " . URL . "donhang.php");
     exit();

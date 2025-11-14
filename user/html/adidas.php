@@ -2,6 +2,7 @@
 <?php
 session_start();
 require_once(__DIR__. "/../function_Nike_Adidas/render_card.php");
+require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
 ?>
 <html lang="en">
   <head>
@@ -31,21 +32,21 @@ require_once(__DIR__. "/../function_Nike_Adidas/render_card.php");
   <body>
     <header>
       <div class="tile-header">
-        <h1>NTN SHOE</h1>
+        <i class="fas fa-shoe-prints" style="font-size: 1.5rem; color: #fff;"></i>
+        <h1>NTN SHOES</h1>
       </div>
-      <nav
-        class="navbar"
-        style="background-color: #e3f2fd"
-        data-bs-theme="light"
-      >
+      <nav class="navbar">
         <ul class="list-header">
-          <li><a href="index.php">Trang chủ</a></li>
-          <li><a href="giohang.php">Giỏ hàng</a></li>
-          <li><a href="donhang.php">Đơn hàng</a></li>
+          <li><a href="index.php"><i class="fas fa-home"></i> Trang chủ</a></li>
+          <li class="position-relative">
+            <a href="giohang.php"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
+           <?php  dem(); ?>
+          </li>
+          <li><a href="donhang.php"><i class="fas fa-box"></i> Đơn hàng</a></li>
           <?php if(isset($_SESSION['USER'])){
-              echo '<li><a href="../function_login/logout.php" id="user">'.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i> </a></li>';
+              echo '<li><a href="../function_login/logout.php" id="user"><i class="fas fa-user-circle"></i> '.$_SESSION['USER'].'<i class="fa fa-sign-out-alt"></i></a></li>';
             }else{
-           echo '<li><a href="login.php"> Login<i class="fa fa-sign-in-alt"></i></a></li>';
+           echo '<li><a href="login.php"><i class="fas fa-sign-in-alt"></i> Login</a></li>';
           } 
           ?>
         </ul>
