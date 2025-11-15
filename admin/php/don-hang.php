@@ -40,6 +40,11 @@
             </a>
           </li>
           <li>
+            <a href="yeu-cau.php">
+              <i class="zmdi zmdi-store"></i> Yêu cầu
+            </a>
+          </li>
+          <li>
             <a href="trang-thai-don-hang.php">
               <i class="zmdi zmdi-assignment-check"></i> Trạng thái đơn hàng
             </a>

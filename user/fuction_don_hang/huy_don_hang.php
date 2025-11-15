@@ -12,6 +12,7 @@
     mysqli_query($con,"UPDATE chi_tiet_don_hang SET trang_thai='đã hủy' WHERE ma_chi_tiet=".$maChiTiet."  ");
     if(countChoXacNhan($con,$maDonHang)==0){
         mysqli_query($con,"UPDATE trang_thai_don_hang SET cho_xac_nhan=NULL,da_huy='đã hủy' WHERE ma_don_hang=".$maDonHang."");
+        mysqli_query($con,"DELETE yc FROM yeu_cau_khach_hang yc JOIN chi_tiet_don_hang ct ON yc.ma_chi_tiet = ct.ma_chi_tiet WHERE ct.trang_thai = 'đã hủy';");
     }
     header("Location: ". URL ."donhang.php");
     exit();

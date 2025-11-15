@@ -3,6 +3,10 @@
 session_start();
 require_once(__DIR__. "/../function_Nike_Adidas/render_card.php");
 require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
+if(!isset($_SESSION['USER'])){
+  header("Location: ".URL_LOGIN_USER);
+  exit();
+}
 ?>
 <html lang="en">
   <head>

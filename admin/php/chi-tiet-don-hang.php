@@ -40,17 +40,23 @@
             </a>
           </li>
           <li>
+            <a href="yeu-cau.php">
+              <i class="zmdi zmdi-store"></i> Yêu cầu
+            </a>
+          </li>
+          <li>
             <a href="trang-thai-don-hang.php">
               <i class="zmdi zmdi-assignment-check"></i> Trạng thái đơn hàng
             </a>
           </li>
+        
           <li>
-            <a href="san-pham.html">
+            <a href="san-pham.php">
               <i class="zmdi zmdi-store"></i> Sản phẩm
             </a>
           </li>
           <li>
-            <a href="khach-hang.html">
+            <a href="khach-hang.php">
               <i class="zmdi zmdi-accounts"></i> Khách hàng
             </a>
           </li>

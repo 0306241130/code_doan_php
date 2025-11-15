@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<?php require_once(__DIR__. "/../function_index/doanh_thu.php")  ?>
+<?php require_once(__DIR__. "/../function_trang_thai/trangThai.php"); ?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
+    <title>Trạng thái đơn hàng - Admin Dashboard</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
@@ -14,31 +14,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
-
     <link rel="stylesheet" href="../css/index.css" />
   </head>
   <body>
@@ -65,7 +40,7 @@
             </a>
           </li>
           <li>
-            <a href="yeu-cau.phpphp">
+            <a href="yeu-cau.php">
               <i class="zmdi zmdi-store"></i> Yêu cầu
             </a>
           </li>
@@ -85,9 +60,7 @@
             </a>
           </li>
           <li>
-            <a href="../fucntion_login/logout.php">
-              <i class="zmdi zmdi-sign-in"></i> Đăng xuất
-            </a>
+            <a href="../function_login/logout.php"> <i class="zmdi zmdi-sign-in"></i> Đăng xuất </a>
           </li>
         </ul>
       </div>
@@ -101,24 +74,41 @@
             <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
           </div>
         </nav>
-      </div>
-      <!-- INSERT_YOUR_CODE -->
-      <div class="container mt-2">
-        <h1 class="mb-2 fw-bold">Bảng thống kê đơn hàng và doanh thu theo tháng</h1>
+        <div class="container-fluid mt-4">
+          <h1>Trạng thái đơn hàng</h1>
+          <label for="trangThaiDonHang" class="form-label">Chọn trạng thái đơn hàng:</label>
+          <select class="form-select" id="trangThaiDonHang" name="trang_thai" onchange="location = this.value;">
+          <option value="chogiaohang.php">Chờ giao hàng</option>
+                <option value="trang-thai-don-hang.php">Chờ xác nhận</option>
+                <option value="cholayhang.php">Chờ lấy hàng</option>
+                
+                <option value="dagiao.php">Đã giao</option>
+                <option value="trahang.php">Trả hàng</option>
+                <option value="dahuy.php">Đã hủy</option>
+              </select>
+        </div>
+      <div class="container-fluid mt-4">
+        <h2>Danh sách đơn hàng</h2>
         <div class="table-responsive">
-          <table class="table table-bordered table-hover align-middle">
-            <thead class="table-primary">
+          <table class="table table-bordered table-striped align-middle">
+            <thead>
               <tr>
-                <th scope="col">Tháng</th>
-                <th scope="col">Số đơn hàng</th>
-                <th scope="col">Doanh thu</th>
+                <th>Mã đơn hàng</th>
+                <th>Ngày đặt hàng</th>
+                <th>Địa chỉ giao hàng</th>
+                <th>Trạng thái</th>
               </tr>
             </thead>
             <tbody>
-              <?php doanThu();?>
+             <?php
+            
+                choGiaoHang();
+             
+             ?>
             </tbody>
           </table>
         </div>
+      </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
