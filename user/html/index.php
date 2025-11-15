@@ -31,7 +31,7 @@ require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
           <li class="active"><a href="index.php"><i class="fas fa-home"></i> Trang chủ</a></li>
           <li class="position-relative">
             <a href="giohang.php"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
-           <?php  dem(); ?>
+           <?php if(isset($_SESSION['USER'])) dem(); ?>
           </li>
           <li><a href="donhang.php"><i class="fas fa-box"></i> Đơn hàng</a></li>
           <?php if(isset($_SESSION['USER'])){

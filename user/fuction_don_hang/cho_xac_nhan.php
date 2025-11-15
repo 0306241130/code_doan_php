@@ -22,7 +22,7 @@
                     <td class="text-center">
                         <div class="d-flex flex-column align-items-center gap-2">
                         <span class="badge bg-success fs-6 px-3 py-2">1</span>
-                        <a href="#" class="btn btn-outline-danger btn-sm px-3">Hủy</a>
+                        <a href="../fuction_don_hang/huy_don_hang.php?mact='.$row['ma_chi_tiet'].'&mdh='.$row['ma_don_hang'].'" class="btn btn-outline-danger btn-sm px-3">Hủy</a>
                         </div>
                     </td>
                     <td class="text-center position-relative fw-bold fs-5">
@@ -30,8 +30,6 @@
                     </td>
                     </tr>';
             }
-        }else{
-            echo'<h1 class="text-danger">Chưa có đơn hàng</h1>';
         }
     }
 ?>

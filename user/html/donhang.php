@@ -3,6 +3,12 @@
 session_start();
 require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
 require_once(__DIR__ . "/../fuction_don_hang/cho_xac_nhan.php");
+require_once(__DIR__ . "/../fuction_don_hang/huy_don_hang.php");
+require_once(__DIR__ . "/../fuction_don_hang/layhang_giaohang_dagiao_tra_hang.php");
+if(!isset($_SESSION['USER'])){
+  header("Location: ".URL_LOGIN_USER);
+  exit();
+}
 ?>
 <html lang="en">
   <head>
@@ -30,7 +36,7 @@ require_once(__DIR__ . "/../fuction_don_hang/cho_xac_nhan.php");
           <li><a href="index.php"><i class="fas fa-home"></i> Trang chủ</a></li>
           <li class="position-relative">
             <a href="giohang.php"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
-           <?php  dem(); ?>
+           <?php if(isset($_SESSION['USER'])) dem(); ?>
           </li>
           <li class="active"><a href="donhang.php"><i class="fas fa-box"></i> Đơn hàng</a></li>
           <?php if(isset($_SESSION['USER'])){
@@ -111,19 +117,99 @@ require_once(__DIR__ . "/../fuction_don_hang/cho_xac_nhan.php");
        
       </div>
       <div class="cho-lay-hang">
-        <h1 class="text-danger">Chưa có đơn hàng</h1>
+           <div class="panel-body p-4 bg-white rounded shadow">
+          <div class="table-responsive">
+            <table class="table align-middle table-hover table-bordered mb-0">
+              <thead class="table-primary">
+                <tr>
+                  <th class="text-center" style="width:170px;">Sản phẩm</th>
+                  <th class="text-center">Tên sản phẩm</th>
+                  <th class="text-center" style="width:120px;">Số lượng</th>
+                  <th class="text-center" style="width:160px;">Giá tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php choLayHang(); ?>
+              </tbody>
+            </table>
+          </div>
+        </div> 
       </div>
       <div class="cho-giao-hang">
-        <h1 class="text-danger">Chưa có đơn hàng</h1>
+          <div class="panel-body p-4 bg-white rounded shadow">
+          <div class="table-responsive">
+            <table class="table align-middle table-hover table-bordered mb-0">
+              <thead class="table-primary">
+                <tr>
+                  <th class="text-center" style="width:170px;">Sản phẩm</th>
+                  <th class="text-center">Tên sản phẩm</th>
+                  <th class="text-center" style="width:120px;">Số lượng</th>
+                  <th class="text-center" style="width:160px;">Giá tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php choGiaoHang(); ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <div class="da-giao">
-        <h1 class="text-danger">Chưa có đơn hàng</h1>
+       <div class="panel-body p-4 bg-white rounded shadow">
+          <div class="table-responsive">
+            <table class="table align-middle table-hover table-bordered mb-0">
+              <thead class="table-primary">
+                <tr>
+                  <th class="text-center" style="width:170px;">Sản phẩm</th>
+                  <th class="text-center">Tên sản phẩm</th>
+                  <th class="text-center" style="width:120px;">Số lượng</th>
+                  <th class="text-center" style="width:160px;">Giá tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php GiaoHang(); ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <div class="tra-hang">
-        <h1 class="text-danger">Chưa có đơn hàng</h1>
+       <div class="panel-body p-4 bg-white rounded shadow">
+          <div class="table-responsive">
+            <table class="table align-middle table-hover table-bordered mb-0">
+              <thead class="table-primary">
+                <tr>
+                  <th class="text-center" style="width:170px;">Sản phẩm</th>
+                  <th class="text-center">Tên sản phẩm</th>
+                  <th class="text-center" style="width:120px;">Số lượng</th>
+                  <th class="text-center" style="width:160px;">Giá tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php TraHang(); ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <div class="da-huy">
-        <h1 class="text-danger">Chưa có đơn hàng</h1>
+      <div class="panel-body p-4 bg-white rounded shadow">
+          <div class="table-responsive">
+            <table class="table align-middle table-hover table-bordered mb-0">
+              <thead class="table-primary">
+                <tr>
+                  <th class="text-center" style="width:170px;">Sản phẩm</th>
+                  <th class="text-center">Tên sản phẩm</th>
+                  <th class="text-center" style="width:120px;">Số lượng</th>
+                  <th class="text-center" style="width:160px;">Giá tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php hangHuy(); ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </body>

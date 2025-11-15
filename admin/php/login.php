@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start();?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,7 +20,7 @@
           <div class="card shadow">
             <div class="card-body">
               <h3 class="card-title text-center mb-4">Login</h3>
-              <form action="#" method="post">
+              <form action="../fucntion_login/loginAdmin.php" method="post">
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
                   <input
@@ -41,8 +42,9 @@
                     placeholder="Enter password"
                     required
                   />
+                  <?php if(isset($_SESSION['ERROR_ADMIN'])) echo $_SESSION['ERROR_ADMIN']; ?>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">
+                <button type="submit" class="btn btn-primary w-100" name="loginAdmin">
                   Login
                 </button>
               </form>

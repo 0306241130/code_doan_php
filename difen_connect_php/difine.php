@@ -5,4 +5,6 @@ define("PASSWORD","");
 define("DB","qlbanhang");
 define("URL","http://localhost/code_doan_PHP/user/html/");
 define("URL_LOGIN_USER","http://localhost/code_doan_PHP/user/html/login.php");
+define("URL_ADMIN","http://localhost/code_doan_PHP/admin/php/");
+define("URL_LOGIN_ADMIN","http://localhost/code_doan_PHP/admin/php/login.php");
 ?>

@@ -60,9 +60,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"&&isset($_POST['Buy'])){
     
     $reslut4=mysqli_query($con,"SELECT MAX(IFNULL(ma_trang_thai,0)) AS ma_trang_thai FROM trang_thai_don_hang");
     $row4=mysqli_fetch_assoc($reslut4);
-    $ma_trang_thai=$row['ma_trang_thai']+1;
+    $ma_trang_thai=$row4['ma_trang_thai']+1;
+    echo $ma_trang_thai;
     $trangThai="xác nhận";
-    mysqli_query($con,"INSERT INTO trang_thai_don_hang (ma_don_hang,cho_xac_nhan,ma_trang_thai) VALUES(".$ma_don_hang.",'".$trangThai."',".$ma_trang_thai.")");
+    mysqli_query($con,"INSERT INTO trang_thai_don_hang (ma_don_hang,cho_xac_nhan,ma_trang_thai) VALUES(".$ma_don_hang.",'".$trangThai."',". $ma_trang_thai.")");
 
 
     header("Location: " . URL . "donhang.php");

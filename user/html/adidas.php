@@ -97,7 +97,7 @@ require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
       <div class="card-produc d-flex flex-wrap gap-3 justify-content-evenly">
           <?php 
           if($_SERVER['REQUEST_METHOD']=="POST"&&isset($_POST['loc'])){
-            render_Card_Loc($price,$procduct);
+            render_Card_Loc_Adidas($price,$procduct);
           }else{
             render_Card_Adidas();
           } 
