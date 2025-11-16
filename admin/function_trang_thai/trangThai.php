@@ -5,6 +5,7 @@ function choXacNhan(){
     global $con;
     $reslut=mysqli_query($con,"SELECT th.*,dh.ngay_dat_hang,dh.dia_chi_giao_hang FROM trang_thai_don_hang th JOIN don_hang dh ON th.ma_don_hang=dh.ma_don_hang ");
     while($row=mysqli_fetch_assoc($reslut)){
+        if(!empty($row['cho_xac_nhan'])){
         echo' <tr>
                 <td>'.$row['ma_don_hang'].'</td>
                 <td>'.$row['ngay_dat_hang'].'</td>
@@ -12,12 +13,13 @@ function choXacNhan(){
                 <td>';
                 if($row['cho_xac_nhan']=='chờ xác nhận'){
                     echo ' <button class="btn btn-warning btn-sm">'.$row['cho_xac_nhan'].'</button>';
-                }else{
+                }else if($row['cho_xac_nhan']=='đã xác nhận'){
                   echo ' <button class="btn btn-success btn-sm">'.$row['cho_xac_nhan'].'</button>';
                 }
                  
                 echo '</td>
               </tr>';
+        }
     }
 }
 function choLayHang(){

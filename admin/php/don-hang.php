@@ -82,16 +82,38 @@
           <table class="table table-bordered table-hover align-middle">
             <thead class="table-primary">
               <tr>
+                <?php  if(!isset($_REQUEST['madh'])){ ?>
                 <th scope="col">STT</th>
                 <th scope="col">Ngày đặt hàng</th>
                 <th scope="col">Phí vận chuyển</th>
                 <th scope="col">Địa chỉ giao hàng</th>
                 <th scope="col">Thành Tiền</th>
                 <th scope="col">Chi tiết</th>
+                <?php }else {?>
+                <th scope="col">STT</th>
+                <th scope="col">Ngày đặt hàng</th>
+                <th scope="col">Phí vận chuyển</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Màu sắc</th>
+                <th scope="col">Địa chỉ giao hàng</th>
+                <th scope="col">Thành Tiền</th>
+                <th scope="col">Chi tiết</th>
+                  <?php }?>
               </tr>
             </thead>
             <tbody>
-              <?php donhang(); ?>
+              
+              <?php
+              
+              if(isset($_REQUEST['madh'])){
+                $madh=$_REQUEST['madh'];
+                donhangChiTiet($madh);
+              }else{
+              donhang();
+              } 
+              
+              ?>
             </tbody>
           </table>
         </div>

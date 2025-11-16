@@ -102,7 +102,7 @@
             <tbody>
              <?php
           
-                daHuy();
+          traHang();
             
              ?>
             </tbody>

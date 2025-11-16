@@ -448,3 +448,8 @@ header {
 .price-old span {
   font-size: large;
 }
+#traHang {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

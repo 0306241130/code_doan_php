@@ -23,9 +23,17 @@ if(!isset($_SESSION['USER'])){
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
+    <style>
+      #traHang{
+        display: flex; justify-content: center; align-items: center; min-height: 200px;
+      }
+      #out{
+        position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.7rem; color: #aaa; z-index:2; cursor:pointer;
+      }
+    </style>
     <link rel="stylesheet" href="../css/index.css" />
   </head>
-  <body class="bg-light">
+  <body class="bg-light ">
     <header>
       <div class="tile-header">
         <i class="fas fa-shoe-prints" style="font-size: 1.5rem; color: #fff;"></i>
@@ -212,8 +220,37 @@ if(!isset($_SESSION['USER'])){
         </div>
       </div>
     </div>
+  
   </body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/index.js"></script>
+  <script>
+
+$(document).ready(() => {
+  $(document).on("click", "#out", () => {
+    $("#traHang").remove();
+  });
+});
+
+    $(document).ready(() => {
+
+  $(document).on("click", "#tra_hang", function () {
+    $("#traHang").remove();
+    let madh = $(this).closest("tr").find(".ma").val();
+    let mact = $(this).val();
+    $.ajax({
+      url: "../fuction_don_hang/ly_do_tra_hang.php",
+      type: "POST",
+      data: { madh: madh, mact: mact },
+      success: function (response) {
+        $("body").append(response);
+      },
+      error: function name(xhr, status, error) {
+        alert("Lỗi AJAX: " + error);
+      },
+    });
+  });
+});
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
 </html>
