@@ -30,12 +30,13 @@ function donhang(){
 }
 function donhangChiTiet($madh){
     global $con;
-    $reslut=mysqli_query($con,"SELECT * FROM don_hang dh JOIN chi_tiet_don_hang ct ON dh.ma_don_hang=ct.ma_don_hang WHERE ct.ma_don_hang=".$madh."");
+    $reslut=mysqli_query($con,"SELECT * FROM don_hang dh JOIN chi_tiet_don_hang ct ON dh.ma_don_hang=ct.ma_don_hang WHERE ct.ma_don_hang=".$madh." ");
     
     $i=0;
     while($row=mysqli_fetch_assoc($reslut)){
         echo '<tr>
                 <td>'.++$i.'</td>
+                <td>'.$row['ma_nguoi_dung'].'</td>
                 <td>'.$row['ngay_dat_hang'].'</td>
                 <td>'.number_format($row['phi_van_chuyen'],0,"",".") .'đ</td>
                 <td>'.$row['tensp'].'</td>

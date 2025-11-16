@@ -91,6 +91,7 @@
                 <th scope="col">Chi tiết</th>
                 <?php }else {?>
                 <th scope="col">STT</th>
+                <th scope="col">Mã người dùng</th>
                 <th scope="col">Ngày đặt hàng</th>
                 <th scope="col">Phí vận chuyển</th>
                 <th scope="col">Tên sản phẩm</th>

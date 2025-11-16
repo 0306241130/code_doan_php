@@ -81,13 +81,14 @@
             <table class="table table-bordered table-hover align-middle">
                 <thead class="table-primary">
                     <tr>
+                        <th scope="col">Mã khách hàng</th>
                         <th scope="col">Mã đơn hàng</th>
                         <th scope="col">Tên sản phẩm</th>
                         <th scope="col">Size</th>
                         <th scope="col">Màu sắc</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">Trạng thái</th>
-                        <th scope="col">Phương thức thanh toántoán</th>
+                        <th scope="col">Phương thức thanh toán</th>
                         <th scope="col">Trạng thái thanh toán</th>
                         <th scope="col">số tiền cần thanh toán</th>
                     </tr>
