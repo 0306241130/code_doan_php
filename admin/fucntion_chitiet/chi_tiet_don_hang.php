@@ -4,7 +4,7 @@ session_start();
 $con=connect();
 function chiTiet(){
     global $con;
-    $reslut=mysqli_query($con,"SELECT dh.ma_nguoi_dung, dh.ma_don_hang,tensp,kich_co,so_luong,mau_sac,trang_thai,tt.phuong_thuc_thanh_toan,tt.trang_thai_thanh_toan,tt.so_tien_can_thanh_toan FROM chi_tiet_don_hang ct JOIN thanh_toan tt on ct.ma_thanh_toan=tt.ma_thanh_toan JOIN don_hang dh ON dh.ma_don_hang=ct.ma_don_hang  WHERE dh.ma_nguoi_dung=".$_SESSION['MA_USER'].";  ");
+    $reslut=mysqli_query($con,"SELECT dh.ma_nguoi_dung, dh.ma_don_hang,tensp,kich_co,so_luong,mau_sac,trang_thai,tt.phuong_thuc_thanh_toan,tt.trang_thai_thanh_toan,tt.so_tien_can_thanh_toan FROM chi_tiet_don_hang ct JOIN thanh_toan tt on ct.ma_thanh_toan=tt.ma_thanh_toan JOIN don_hang dh ON dh.ma_don_hang=ct.ma_don_hang  ;  ");
     while($row=mysqli_fetch_assoc($reslut)){
         echo'<tr>       
                         <td>'.$row['ma_nguoi_dung'].'</td>

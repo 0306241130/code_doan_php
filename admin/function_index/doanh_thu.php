@@ -13,7 +13,7 @@ JOIN chi_tiet_don_hang ct
     ON dh.ma_don_hang = ct.ma_don_hang
 WHERE 
     ct.trang_thai = 'đã giao'
-    AND YEAR(dh.ngay_dat_hang) = YEAR(CURRENT_TIMESTAMP())
+    -- AND YEAR(dh.ngay_dat_hang) = YEAR(CURRENT_TIMESTAMP())
 GROUP BY 
     YEAR(dh.ngay_dat_hang),
     MONTH(dh.ngay_dat_hang)
