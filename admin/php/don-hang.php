@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<?php require_once(__DIR__. "/../function_don_hang/donhang.php") ?>
+<?php require_once(__DIR__. "/../function_don_hang/donhang.php") ;
+session_start();
+if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
+    header("Location: " . URL_LOGIN_ADMIN);
+    exit();
+}
+?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<?php require_once(__DIR__. "/../function_index/doanh_thu.php")  ?>
+<?php require_once(__DIR__. "/../function_index/doanh_thu.php");
+require_once(__DIR__. "/../../difen_connect_php/connect.php");  
+session_start();
+if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
+    header("Location: " . URL_LOGIN_ADMIN);
+    exit();
+}
+?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

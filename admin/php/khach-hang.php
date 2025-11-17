@@ -75,7 +75,26 @@
         </nav>
         <div class="container-fluid mt-4">
           <h1>Khách hàng</h1>
-          <p>Quản lý thông tin khách hàng.</p>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+              <thead>
+                <tr>
+                  <th>Mã khách hàng</th>
+                  <th>Email</th>
+                  <th>Họ tên</th>
+                  <th>Ngày đăng ký</th>
+                  <th>Số đơn hàng</th>
+                  <th>Chi tiết</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  require_once(__DIR__. "/../function_khach_hang/khach_hang.php");
+                  khachHang();
+                ?>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
