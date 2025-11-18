@@ -4,7 +4,7 @@ $con=connect();
 function render_card_new(){
     global $con;
     if($con){
-        $sql="SELECT *,gia_ban*(1-IFNULL(giam_gia,0)/100) AS gia_sau_khi_giam FROM san_pham WHERE mo_ta='new' LIMIT 6";
+        $sql="SELECT *,gia_ban*(1-IFNULL(giam_gia,0)/100) AS gia_sau_khi_giam FROM san_pham WHERE mo_ta='new' ORDER BY ma_san_pham LIMIT 6";
         $result=mysqli_query($con,$sql);
         while($row=mysqli_fetch_assoc($result)){
             echo'<div class="card" style="width: 18rem">
@@ -34,7 +34,7 @@ function render_card_new(){
 function render_card_hot(){
     global $con;
     if($con){
-        $sql="SELECT *,gia_ban*(1-IFNULL(giam_gia,0)/100) AS gia_sau_khi_giam FROM san_pham WHERE mo_ta='hot' LIMIT 6";
+        $sql="SELECT *,gia_ban*(1-IFNULL(giam_gia,0)/100) AS gia_sau_khi_giam FROM san_pham WHERE mo_ta='hot' ORDER BY ma_san_pham LIMIT 6";
         $result=mysqli_query($con,$sql);
         while($row=mysqli_fetch_assoc($result)){
             echo'<div class="card" style="width: 18rem">

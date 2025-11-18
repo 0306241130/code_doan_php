@@ -26,6 +26,20 @@ require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
         <i class="fas fa-shoe-prints" style="font-size: 1.5rem; color: #fff;"></i>
         <h1>NTN SHOES</h1>
       </div>
+      <div class="d-flex flex-column align-items-center" style="position: relative; margin: 0 auto;">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="form-control form-control-sm w-50 mt-3"
+          placeholder="Tìm kiếm sản phẩm..." 
+          style="z-index:2; min-width:300px;"
+        />
+        <ul id="searchResults" class="list-group position-absolute w-100"
+            style="left:50%;transform:translateX(-50%);z-index:3;max-height:180px;overflow-y:auto;min-width:150px;top:55px;">
+        
+          
+        </ul>
+      </div>
       <nav class="navbar">
         <ul class="list-header">
           <li class="active"><a href="index.php"><i class="fas fa-home"></i> Trang chủ</a></li>
@@ -105,7 +119,7 @@ require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
             <div class="card">
               <h5 class="card-title fs-3">Nike</h5>
               <img
-                src="../img/baner_adidas.jpg"
+                src="../img/banner_Nike.jpg"
                 class="card-img-bottom"
                 alt="..."
               />
@@ -115,7 +129,7 @@ require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
             <div class="card">
               <h5 class="card-title fs-3">Adidas</h5>
               <img
-                src="../img/banner_Nike.jpg"
+                src="../img/baner_adidas.jpg"
                 class="card-img-bottom"
                 alt="..."
               />
@@ -155,4 +169,29 @@ require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/index.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+  <script>$(document).ready(() => {
+  $("#searchResults").hide();
+  $("#searchInput").on("keyup", function () {
+    $("#searchResults li").remove();
+    let value = $("#searchInput").val();
+    if (!value) {
+      $("#searchResults").hide();
+    } else {
+      tensp = $(this).val();
+      $.ajax({
+        url: "../function_index/search.php",
+        type: "POST",
+        data: { tensp: tensp },
+        success: function (response) {
+          $("#searchResults").append(response);
+          $("#searchResults").show();
+        },
+        error: function (xhr, status, error) {
+          $("#searchResults").hide();
+          alert("Đã xảy ra lỗi tìm kiếm!");
+        },
+      });
+    }
+  });
+});</script>
 </html>

@@ -57,13 +57,13 @@ if(!isset($_SESSION['USER'])){
       </nav>
     </header>
     <?php
-    if($_SERVER['REQUEST_METHOD']=="POST"&&isset($_POST['loc'])){
-      if(isset($_POST['price']))$price=$_POST['price'];
-      if(isset($_POST['product']))$procduct=$_POST['product'];
+    if($_SERVER['REQUEST_METHOD']=="GET"&&isset($_GET['loc'])){
+      if(isset($_GET['price']))$price=$_GET['price'];
+      if(isset($_GET['product']))$procduct=$_GET['product'];
     }
     ?>
     <div class="container d-flex flex-column gap-3">
-      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
         <div class="col-md-6 d-flex gap-2">
           <select
             name="price"
@@ -100,7 +100,7 @@ if(!isset($_SESSION['USER'])){
       </form>
       <div class="card-produc d-flex flex-wrap gap-3 justify-content-evenly">
           <?php 
-          if($_SERVER['REQUEST_METHOD']=="POST"&&isset($_POST['loc'])){
+          if($_SERVER['REQUEST_METHOD']=="GET"&&isset($_GET['loc'])){
             render_Card_Loc($price,$procduct);
           }else{
             render_Card_Nike();
