@@ -89,7 +89,7 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
             <thead class="table-primary">
               <tr>
                 <?php  if(!isset($_REQUEST['madh'])){ ?>
-                <th scope="col">STT</th>
+                <th scope="col">Mã đơn hàng</th>
                 <th scope="col">Ngày đặt hàng</th>
                 <th scope="col">Phí vận chuyển</th>
                 <th scope="col">Địa chỉ giao hàng</th>

@@ -16,10 +16,10 @@ WHERE dh.ma_don_hang = ".$madonHang."
 function donhang(){
     global $con;
     $reslut=mysqli_query($con,"SELECT * FROM don_hang");
-    $i=0;
+
     while($row=mysqli_fetch_assoc($reslut)){
         echo '<tr>
-                <td>'.++$i.'</td>
+                <td>'.$row['ma_don_hang'].'</td>
                 <td>'.$row['ngay_dat_hang'].'</td>
                 <td>'.number_format($row['phi_van_chuyen'],0,"",".") .'đ</td>
                 <td>'.$row['dia_chi_giao_hang'].'</td>

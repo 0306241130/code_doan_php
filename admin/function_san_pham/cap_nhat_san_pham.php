@@ -18,14 +18,18 @@ $size=explode(",",$size);
 
 
 mysqli_query($con, "UPDATE san_pham SET ten_san_pham='".$ten_san_pham."', mo_ta='".$mo_ta."', ma_thuong_hieu=".$ma_thuong_hieu.", gia_ban=".$gia_ban.", giam_gia=".$giam_gia." WHERE ma_san_pham=".$_POST['ma_san_pham']);
+
 mysqli_query($con, "DELETE FROM mau_san_pham WHERE ma_san_pham=".$ma_san_pham);
-mysqli_query($con, "DELETE FROM size_san_pham WHERE ma_san_pham=".$ma_san_pham);
 foreach($mau_san_pham AS $value){
     mysqli_query($con,"INSERT INTO mau_san_pham VALUES(".$ma_san_pham.",'".$value."')");
 }
+
+
+mysqli_query($con, "DELETE FROM size_san_pham WHERE ma_san_pham=".$ma_san_pham);
 foreach($size AS $value){
     mysqli_query($con,"INSERT INTO size_san_pham VALUES(".$ma_san_pham.",".(int)$value.")");
 }
+
 
 
 // Xử lý file hình ảnh nếu có
