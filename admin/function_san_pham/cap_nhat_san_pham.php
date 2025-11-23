@@ -54,11 +54,7 @@ if(isset($_FILES['hinh_anh'])){
          $allowUpload = false;
      }
 
-     //4. Kiểm tra file đã tồn tại trên server chưa?
-     if (file_exists($target_file)) {
-         echo "<br>The file name already exists on the server.";
-         $allowUpload = false;
-     }
+   
 
      if ($allowUpload) {
          //Lưu file vào thư mục được chỉ định trên server

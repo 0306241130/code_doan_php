@@ -3,7 +3,7 @@
     $con=connect();
     function choXacNhan(){
     global $con;
-    $result=mysqli_query($con,"SELECT * FROM chi_tiet_don_hang ctdh JOIN don_hang dh ON ctdh.ma_don_hang=dh.ma_don_hang WHERE dh.ma_nguoi_dung=".$_SESSION['MA_USER']." AND ctdh.trang_thai='chờ xác nhận'");
+    $result=mysqli_query($con,"SELECT * FROM chi_tiet_don_hang ctdh JOIN don_hang dh ON ctdh.ma_don_hang=dh.ma_don_hang WHERE dh.ma_nguoi_dung=".$_SESSION['MA_USER']." AND dh.ma_trang_thai=1");
         if(mysqli_num_rows($result)){
             while($row=mysqli_fetch_assoc($result)){
                 echo'<tr>

@@ -1,25 +1,27 @@
 <?php
  require_once(__DIR__. "/../../difen_connect_php/connect.php");
  $con=connect();
- function countChoXacNhan($con,$maDonHang){
-        $result=mysqli_query($con,"SELECT COUNT(*) AS soLuong FROM chi_tiet_don_hang WHERE ma_don_hang=".$maDonHang." AND trang_thai='chờ xác nhận'");
+ function countChoXacNhan($con,$maDonHang,$maChiTiet){
+        $result=mysqli_query($con,"SELECT COUNT(*) AS soLuong FROM chi_tiet_don_hang ct WHERE ma_don_hang=".$maDonHang."");
+        $result1=mysqli_query($con,"SELECT COUNT(*) AS soLuongHuy FROM  huy_hang hh JOIN  chi_tiet_don_hang ct ON ct.ma_chi_tiet=hh.ma_chi_tiet WHERE ct.ma_don_hang=".$maDonHang." ");
         $row=mysqli_fetch_assoc($result);
-        return $row['soLuong'];
+        $row1=mysqli_fetch_assoc($result1);
+        if((int)$row['soLuong'] === (int)$row1['soLuongHuy'])return TRUE;
+        else return FALSE;
  }
  if(isset($_REQUEST['mact'])&&isset($_REQUEST['mdh'])){
     $maChiTiet=$_REQUEST['mact'];
     $maDonHang=$_REQUEST['mdh'];
-    mysqli_query($con,"UPDATE chi_tiet_don_hang SET trang_thai='đã hủy' WHERE ma_chi_tiet=".$maChiTiet."  ");
-    if(countChoXacNhan($con,$maDonHang)==0){
-        mysqli_query($con,"UPDATE trang_thai_don_hang SET cho_xac_nhan=NULL,da_huy='đã hủy' WHERE ma_don_hang=".$maDonHang."");
-        mysqli_query($con,"DELETE yc FROM yeu_cau_khach_hang yc JOIN chi_tiet_don_hang ct ON yc.ma_chi_tiet = ct.ma_chi_tiet WHERE ct.trang_thai = 'đã hủy';");
+    mysqli_query($con,"INSERT INTO huy_hang VALUES(NULL,".$maChiTiet.")");
+    if(countChoXacNhan($con,$maDonHang,$maChiTiet)===TRUE){
+       mysqli_query($con,"UPDATE don_hang SET ma_trang_thai=6 WHERE ma_don_hang=".$maDonHang."");
     }
     header("Location: ". URL ."donhang.php");
     exit();
  }
  function hangHuy(){
     global $con;
-     $result=mysqli_query($con,"SELECT * FROM chi_tiet_don_hang ctdh JOIN don_hang dh ON ctdh.ma_don_hang=dh.ma_don_hang WHERE ma_nguoi_dung=".$_SESSION['MA_USER']." AND trang_thai='đã hủy'");
+     $result=mysqli_query($con,"SELECT * FROM chi_tiet_don_hang ctdh JOIN don_hang dh ON ctdh.ma_don_hang=dh.ma_don_hang JOIN huy_hang hh ON hh.ma_chi_tiet=ctdh.ma_chi_tiet WHERE dh.ma_nguoi_dung=".$_SESSION['MA_USER']." ");
      while($row=mysqli_fetch_assoc($result)){
         echo'<tr>
                     <td class="text-center">

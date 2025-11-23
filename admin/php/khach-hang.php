@@ -49,17 +49,12 @@
             </a>
           </li>
           <li>
-            <a href="kho-san-pham.php">
-              <i class="zmdi zmdi-store"></i> Kho sản phẩm
-            </a>
-          </li>
-          <li>
             <a href="khach-hang.php">
               <i class="zmdi zmdi-accounts"></i> Khách hàng
             </a>
           </li>
           <li>
-            <a href="#"> <i class="zmdi zmdi-sign-in"></i> Đăng xuất </a>
+            <a href="../fucntion_login/logout.php"> <i class="zmdi zmdi-sign-in"></i> Đăng xuất </a>
           </li>
         </ul>
       </div>

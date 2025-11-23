@@ -29,8 +29,7 @@ foreach($size AS $value){
 }
 
 
-// Xử lý file hình ảnh nếu có
-$hinh_anh = "";
+
 if(isset($_FILES['hinh_anh'])){
      //Thư mục bạn lưu file upload
      $target_dir = "D:/0306241130/PHP/phan_mem_xampp/htdocs/code_doan_php/user/img/";
