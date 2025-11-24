@@ -1,7 +1,6 @@
 <?php 
-session_start();
 require_once(__DIR__. "/../../difen_connect_php/connect.php");
-if(isset($_REQUEST['masp']))$masp=isset($_REQUEST['masp']);
+if(isset($_REQUEST['masp']))$masp=$_REQUEST['masp']??$_REQUEST['edit_card'];
 function render_Size($con,$Size){
     global $masp;
     $result1=mysqli_query($con,"SELECT * FROM size_san_pham WHERE ma_san_pham=".$masp."");
@@ -55,7 +54,7 @@ function sua_gio_hang(){
     $con=connect();
     $result=mysqli_query($con,"SELECT * FROM gio_hang WHERE ma_san_pham=".$masp." AND ma_nguoi_dung=".$_SESSION['MA_USER']."");
     $row=mysqli_fetch_assoc($result);
-    echo ' <form action="../function_gio_hang/update_gio_hang.php" method="POST" class="p-4 bg-light rounded shadow">
+    echo ' <form action="sua_gio_hang.php" method="POST" class="p-4 bg-light rounded shadow">
               <div class="mb-4">
                 <label class="form-label fw-bold text-secondary">Size</label>
                 <div class="d-flex flex-wrap gap-2">
@@ -93,7 +92,7 @@ function sua_gio_hang(){
 }
 function sua_gio_hang1 (){
     global $masp;
-    $masp=$_REQUEST['masp'];
+    $masp=$_REQUEST['masp']??$_REQUEST['edit_card'];
     $con=connect();
     $result=mysqli_query($con,"SELECT * FROM gio_hang WHERE ma_san_pham=".$masp." AND ma_nguoi_dung=".$_SESSION['MA_USER']."");
     $row3=mysqli_fetch_assoc($result);

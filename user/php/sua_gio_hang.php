@@ -4,6 +4,7 @@ session_start();
 require_once(__DIR__. "/../../difen_connect_php/connect.php");
 require_once(__DIR__ . "/../function_gio_hang/sua_gio_hang.php");
 require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
+  require_once(__DIR__. "/../function_gio_hang/update_gio_hang.php");
 
 if(!isset($_SESSION['USER'])){
   header("Location: ".URL_LOGIN_USER);
@@ -77,5 +78,13 @@ if(!isset($_SESSION['USER'])){
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      if ($('.alert').length > 0) {
+        $('.container.bootstrap.snippets.bootdey.row-md-12').css('margin-top', '10px');
+      }
+    });
+    </script>
   </body>
 </html>

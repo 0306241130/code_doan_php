@@ -20,7 +20,10 @@ function insertThanToan($con,$phuongThucThanhToan,$soTienCanThanhToan){
     mysqli_query($con,"INSERT INTO thanh_toan VALUES(".$maThanhToanMoi.",'".$phuongThucThanhToan."','".$trangThai."',".$soTienCanThanhToan.")");
     return $maThanhToanMoi;
 }
-
+function updateKhoSanPham($con,$masp,$size,$mau,$soluong){
+    mysqli_query($con,"UPDATE so_luong_ton SET soluong=soluong-".$soluong." WHERE ma_san_pham=".$masp." AND size=".$size." AND mau_sac='".$mau."'");
+    echo "UPDATE so_luong_ton SET soluong=soluong-".$soluong." WHERE ma_san_pham=".$masp." AND size=".$size." AND mau_sac='".$mau."'";
+}
 
 ?>
 <?php
@@ -39,7 +42,7 @@ while($row=mysqli_fetch_assoc($relsultGioHang)){
    $reslutMaChiTiet=mysqli_query($con,"SELECT MAX(IFNULL(ma_chi_tiet,0)) AS ma_chi_tiet FROM chi_tiet_don_hang");
    $newMaChiTiet=mysqli_fetch_assoc($reslutMaChiTiet);
    $maChiTietMoi=$newMaChiTiet['ma_chi_tiet']+1;
-  
+   updateKhoSanPham($con,$row['ma_san_pham'],$row['kich_co'],$row['mau_sac'],$row['so_luong']);
    $sql="INSERT INTO chi_tiet_don_hang VALUES(".$maChiTietMoi.",".$maThanhToanMoi.",".$maDonHangMoi.",".$row['ma_san_pham'].",'".$row['ten_san_pham']."',".$row['kich_co'].",'".$row['mau_sac']."',".$row['so_luong'].",".$row['gia'].")";
    $kq=mysqli_query($con,$sql);
 }

@@ -18,6 +18,7 @@
                     <td>
                         <div class="fw-semibold mb-1">'.$row['tensp'].'</div>
                         <div class="text-muted small">Size: '.$row['kich_co'].'</div>
+                    <div class="text-muted small">Màu sắc: <span class="badge bg-warning text-dark border border-1 border-secondary rounded-pill px-3 py-1">'.$row['mau_sac'].'</span></div>
                     </td>
                     <td class="text-center">
                         <div class="d-flex flex-column align-items-center gap-2">

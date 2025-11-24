@@ -45,6 +45,7 @@ function table_Buy(){
     global $con,$masp;
     $result=mysqli_query($con,"SELECT *,gia_ban*(1-IFNULL(giam_gia,0)/100) AS gia_giam FROM san_pham WHERE ma_san_pham='".$masp."'");
     $row=mysqli_fetch_assoc($result);
+    if($row['trang_thai_san_pham']==1){
     echo '<table class="table table-bordered align-middle shadow mt-3">
                     <thead class="table-info">
                       <tr>
@@ -94,11 +95,19 @@ function table_Buy(){
                       </tr>
                     </tbody>
                   </table>';
+    }else{
+      echo '<div class="d-flex justify-content-center align-items-center" style="height:120px;">
+              <span class="badge bg-danger fs-5 px-4 py-3 text-center">Sản phẩm đã hết hàng</span>
+            </div>';
+    }
 }
 
 function from_Buy(){
-    global $masp;
-    echo '<form action="../function_Buy/dat_hang.php" method="post" class="p-4 bg-white shadow rounded-3 mt-3">
+    global $masp,$con;
+    $result=mysqli_query($con,"SELECT * FROM san_pham WHERE ma_san_pham='".$masp."'");
+    $row=mysqli_fetch_assoc($result);
+    if($row['trang_thai_san_pham']==1){
+    echo '<form action="buy.php" method="post" class="p-4 bg-white shadow rounded-3 mt-3">
               <div class="mb-3">
                 <label for="inputName" class="form-label fw-semibold fs-6"
                   >Tên người nhận</label>
@@ -164,5 +173,6 @@ function from_Buy(){
               </div>
             </form>
 ';
+    }
 }
 ?>

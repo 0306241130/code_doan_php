@@ -46,10 +46,14 @@ $(document).ready(() => {
         type: "POST",
         data: { size: size, color: color, soLuong: soLuong, masp: masp },
         success: function (response) {
-          $(".card-shoes").remove();
-          localStorage.setItem("scrollPos", window.scrollY);
-          // Reload trang
-          location.reload();
+          if (response && response.trim().length > 0) {
+            alert(response.trim());
+          } else {
+            $(".card-shoes").remove();
+            // Reload trang
+            location.reload();
+            localStorage.setItem("scrollPos", window.scrollY);
+          }
         },
         error: function (xhr, status, error) {
           alert("Lỗi AJAX: " + error);

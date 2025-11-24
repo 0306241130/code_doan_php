@@ -12,6 +12,13 @@
  if(isset($_REQUEST['mact'])&&isset($_REQUEST['mdh'])){
     $maChiTiet=$_REQUEST['mact'];
     $maDonHang=$_REQUEST['mdh'];
+    mysqli_query($con,"UPDATE so_luong_ton slt
+                        JOIN chi_tiet_don_hang ct 
+                        ON ct.ma_san_pham = slt.ma_san_pham
+                        AND slt.mau_sac = ct.mau_sac
+                        AND slt.size = ct.kich_co
+                        SET slt.soluong = slt.soluong + ct.so_luong;
+                    ");
     mysqli_query($con,"INSERT INTO huy_hang VALUES(NULL,".$maChiTiet.")");
     if(countChoXacNhan($con,$maDonHang,$maChiTiet)===TRUE){
        mysqli_query($con,"UPDATE don_hang SET ma_trang_thai=6 WHERE ma_don_hang=".$maDonHang."");
@@ -39,7 +46,7 @@
                     <td class="text-center">
                         <div class="d-flex flex-column align-items-center gap-2">
                         <span class="badge bg-success fs-6 px-3 py-2">'.$row['so_luong'].'</span>
-                        <a href="../fuction_don_hang/mua_lai.php?mact='.$row['ma_chi_tiet'].'&mdh='.$row['ma_don_hang'].'" class="btn btn-outline-danger btn-sm px-3">Mua lại</a>
+                        <a href="buy.php?masp='.$row['ma_san_pham'].'" class="btn btn-outline-danger btn-sm px-3">Mua lại</a>
                         </div>
                     </td>
                     <td class="text-center position-relative fw-bold fs-5">

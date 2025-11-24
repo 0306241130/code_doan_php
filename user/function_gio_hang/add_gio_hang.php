@@ -21,6 +21,12 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     if(isset($_POST['soLuong']))$soLuong=$_POST['soLuong'];
     if(isset($_POST['masp']))$masp=$_POST['masp'];
     $con=connect();
+    $result1 =mysqli_query($con,"SELECT * FROM so_luong_ton WHERE ma_san_pham=".$masp." AND mau_sac='".$color."' AND size=".$size."");
+    $row1=mysqli_fetch_assoc($result1);
+    if($row1['soluong']<$soLuong){
+        echo "Số lượng sản phẩm không đủ trong kho.";
+    }else{
+    
     $result=mysqli_query($con,"SELECT ten_san_pham, gia_ban*(1-IFNULL(giam_gia,0)/100) AS gia_sau_khi_giam FROM san_pham WHERE ma_san_pham='".$masp."'");
     $row=mysqli_fetch_assoc($result);
     if(kiemTraSanPham($con,$masp,$size,$color)){
@@ -28,5 +34,6 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     }else{
     mysqli_query($con,"INSERT INTO gio_hang VALUES(".$_SESSION['MA_USER'].",".$soLuong.",'".$row['ten_san_pham']."',".$masp.",".$size.",'".$color."',".$row['gia_sau_khi_giam']*$soLuong." )");
     }
+}
 }
 ?>

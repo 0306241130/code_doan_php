@@ -12,6 +12,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"&&isset($_POST['Buy'])){
     if(isset($_POST['Color']))$color=$_POST['Color'];
     if(isset($_POST['payment-method']))$thanh_Toan=$_POST['payment-method'];
     if(isset($_POST['Buy']))$masp=$_POST['Buy'];
+    $reslut3=mysqli_query($con,"SELECT * FROM so_luong_ton WHERE ma_san_pham=".$masp." AND size=".$size." AND mau_sac='".$color."'");
+    $row3=mysqli_fetch_assoc($reslut3);
+    if($row3['soluong']-1>=0){ 
     $reslut=mysqli_query($con,"SELECT MAX(IFNULL(ma_thanh_toan,0)) AS ma_thanh_toan FROM thanh_toan");
     $row=mysqli_fetch_assoc($reslut);
     $ma_thanh_toan=$row['ma_thanh_toan']+1;
@@ -51,11 +54,17 @@ if($_SERVER["REQUEST_METHOD"]=="POST"&&isset($_POST['Buy'])){
     $sql="INSERT INTO chi_tiet_don_hang(ma_chi_tiet,ma_thanh_toan, ma_don_hang, ma_san_pham, tensp, kich_co, mau_sac, so_luong, gia) VALUES(".$chi_tiet_don_hang.",".$ma_thanh_toan.",".$ma_don_hang.",".$masp.",'".$ten_san_pham."',".$size.",'".$color."',".$so_Luong.",'".$gia_san_pham."')";
     mysqli_query($con,$sql);
 
-   
-   
-
-
+      
+    mysqli_query($con,"UPDATE so_luong_ton SET soluong=soluong-1 WHERE ma_san_pham=".$masp." AND size=".$size." AND mau_sac='".$color."'");
     header("Location: " . URL . "donhang.php");
     exit();
+    }else{
+        echo'<div class="alert alert-danger text-center" style="margin-top: 2rem; margin-bottom:0rem;">Sản phẩm đã hết hàng, xin vui lòng chọn màu hoặc size khác.</div>';
+    }
+    
+    
+
+
+    
 }
 ?>
