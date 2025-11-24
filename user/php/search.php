@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
 session_start();
-require_once(__DIR__. "/../function_index/render_car.php");
 require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
 ?>
 <html lang="en">
@@ -61,86 +60,41 @@ require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
         </ul>
       </nav>
     </header>
-    <div class="baner-main">
-      <div id="carouselExampleFade" class="carousel slide carousel-fade">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="../img/banner_Nike.jpg" class="d-block w-100" alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../img/baner_adidas.jpg"
-              class="d-block w-100"
-              alt="..."
-            />
-          </div>
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-    <div class="main">
-      <br />
-
-      <section class="shose-new">
-        <div class="tile-shose-new">
-          <h2>Sản Phẩm Mới</h2>
-        </div>
-        <div class="card-shoe-new">
-          <?php render_card_new() ?>
-        </div>
-      </section>
-      <section class="shoe-hot">
-        <div class="tile-shose-hot">
-          <h2>Sản Phẩm Hot</h2>
-        </div>
-        <div class="card-shoe-hot">
-        <?php render_card_hot() ?>
-        </div>
-      </section>
-      <section class="nike-or-adidas">
-        <div class="tile-nike-or-adidas">
-          <h2>Danh mục sản phẩm</h2>
-        </div>
-        <div class="main-car-nike-or-adidas">
-          <a href="Nike.php">
-            <div class="card">
-              <h5 class="card-title fs-3">Nike</h5>
-              <img
-                src="../img/banner_Nike.jpg"
-                class="card-img-bottom"
-                alt="..."
-              />
-            </div>
-          </a>
-          <a href="adidas.php">
-            <div class="card">
-              <h5 class="card-title fs-3">Adidas</h5>
-              <img
-                src="../img/baner_adidas.jpg"
-                class="card-img-bottom"
-                alt="..."
-              />
-            </div>
-          </a>
-        </div>
-      </section>
+ 
+    <div class="container main mt-4 d-flex flex-wrap gap-3 justify-content-start align-items-stretch">
+          <?php
+          if($_SERVER['REQUEST_METHOD']=="GET" ){
+            if(isset($_GET['query']))$char=$_GET['query'];
+            echo $char;
+            $con=connect();
+            
+            $result=mysqli_query($con,"SELECT *,gia_ban*(1-IFNULL(giam_gia,0)/100) AS gia_sau_khi_giam FROM san_pham WHERE ten_san_pham LIKE'%".$char."%'");
+            while($row=mysqli_fetch_assoc($result)){
+                echo'<div class="card" style="width: 18rem">
+                <img src="../img/'.$row['ten_san_pham'].'.jpg" class="card-img-top" alt="'.$row['ten_san_pham'].'" />
+                <div class="card-body">
+                  <p class="card-text fw-bold">'.$row['ten_san_pham'].'</p>
+                  <span class="fw-bold">'.number_format( $row['gia_sau_khi_giam'],0,"",".").'₫</span><br />
+                  <strong class="price-old"
+                    ><s>'.number_format( $row['gia_ban'],0,"").'₫</s> <span>-'.$row['giam_gia'].'%</span></strong
+                  >
+                  <div class="d-flex gap-2 coulmn-6 mx-auto">
+                    <a href="buy.php?masp='.$row['ma_san_pham'].'" class="btn btn-outline-success pull-right">
+                      Buy
+                    </a>
+                    <a
+                      data-masp="'.$row['ma_san_pham'].'"
+                      class="btn btn-danger pull-right fw-bold ms-1 add-to-card"
+                    >
+                      <i class="fa fa-shopping-cart"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>';
+            }
+          }
+          ?>
+      
     </div>
        <footer class="footer">
       <div class="footer-content">
