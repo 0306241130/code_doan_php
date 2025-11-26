@@ -66,13 +66,9 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
               <i class="zmdi zmdi-shopping-cart"></i> Đơn hàng
             </a>
           </li>
+         
           <li>
-            <a href="chi-tiet-don-hang.php">
-              <i class="zmdi zmdi-store"></i> Chi tiết đơn hàng
-            </a>
-          </li>
-          <li>
-            <a href="yeu-cau.phpphp">
+            <a href="yeu-cau.php">
               <i class="zmdi zmdi-store"></i> Yêu cầu
             </a>
           </li>

@@ -34,8 +34,8 @@
             </a>
           </li>
           <li>
-            <a href="chi-tiet-don-hang.php">
-              <i class="zmdi zmdi-store"></i> Chi tiết đơn hàng
+            <a href="yeu-cau.phpphp">
+              <i class="zmdi zmdi-store"></i> Yêu cầu
             </a>
           </li>
           <li>

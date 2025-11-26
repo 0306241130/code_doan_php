@@ -35,11 +35,6 @@
             </a>
           </li>
           <li>
-            <a href="chi-tiet-don-hang.php">
-              <i class="zmdi zmdi-store"></i> Chi tiết đơn hàng
-            </a>
-          </li>
-          <li>
             <a href="yeu-cau.php">
               <i class="zmdi zmdi-store"></i> Yêu cầu
             </a>
@@ -82,6 +77,8 @@
                 <th scope="col">Mã đơn hàng</th>
                 <th scope="col">Ngày yêu cầu</th>
                 <th scope="col">Yêu cầu</th>
+                <th scope="col">Lý do</th>
+                <th scope="col">thao tác</th>
               </tr>
             </thead>
             <tbody>

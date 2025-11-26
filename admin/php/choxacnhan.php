@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php require_once(__DIR__. "/../function_trang_thai/trangThai.php");
 require_once(__DIR__. "/../function_trang_thai/xacnhandonhang.php");
-
 session_start();
 if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
     header("Location: " . URL_LOGIN_ADMIN);
@@ -56,7 +55,7 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
               <i class="zmdi zmdi-time"></i> Chờ xác nhận
             </a>
           </li>
-         
+          
           <li>
             <a href="cholayhang.php">
               <i class="zmdi zmdi-truck"></i> Chờ lấy hàng
@@ -108,7 +107,7 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
             <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
           </div>
         </nav>
-     
+       
       <div class="container-fluid mt-4">
         <h2>Danh sách đơn hàng</h2>
         <div class="table-responsive">
@@ -123,7 +122,7 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
             </thead>
             <tbody>
              <?php
-              DaGiao();
+              choXacNhan();
              ?>
             </tbody>
           </table>

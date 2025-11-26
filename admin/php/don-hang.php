@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php require_once(__DIR__. "/../function_don_hang/donhang.php") ;
+require_once(__DIR__. "/../function_don_hang/xoadonhang.php") ;
 session_start();
 if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
     header("Location: " . URL_LOGIN_ADMIN);
@@ -41,11 +42,6 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
             </a>
           </li>
           <li>
-            <a href="chi-tiet-don-hang.php">
-              <i class="zmdi zmdi-store"></i> Chi tiết đơn hàng
-            </a>
-          </li>
-          <li>
             <a href="yeu-cau.php">
               <i class="zmdi zmdi-store"></i> Yêu cầu
             </a>
@@ -63,7 +59,7 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
           </li>
          
           <li>
-            <a href="khach-hang.html">
+            <a href="khach-hang.php">
               <i class="zmdi zmdi-accounts"></i> Khách hàng
             </a>
           </li>
@@ -83,7 +79,16 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
           </div>
         </nav>
         <div class="container-fluid mt-4">
-        <h2 class="mb-4">Danh sách đơn hàng</h2>
+          <?php
+           if(isset($_REQUEST['madh'])){
+            $madh=$_REQUEST['madh'];
+            echo '<h2 class="mb-4">Chi tiết đơn hàng</h2>';
+          }else{
+            echo'<h2 class="mb-4">Danh sách đơn hàng</h2>';
+          }
+            
+            ?>
+        
         <div class="table-responsive">
           <table class="table table-bordered table-hover align-middle">
             <thead class="table-primary">
@@ -94,7 +99,8 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
                 <th scope="col">Phí vận chuyển</th>
                 <th scope="col">Địa chỉ giao hàng</th>
                 <th scope="col">Thành Tiền</th>
-                <th scope="col">Chi tiết</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Thao tác</th>
                 <?php }else {?>
                 <th scope="col">STT</th>
                 <th scope="col">Mã người dùng</th>
@@ -104,8 +110,8 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
                 <th scope="col">Số lượng</th>
                 <th scope="col">Màu sắc</th>
                 <th scope="col">Địa chỉ giao hàng</th>
-                <th scope="col">Thành Tiền</th>
-                <th scope="col">Chi tiết</th>
+                <th scope="col">Thành Tiền</th> 
+                <th scope="col">Thao tác</th> 
                   <?php }?>
               </tr>
             </thead>
@@ -113,12 +119,9 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
               
               <?php
               
-              if(isset($_REQUEST['madh'])){
-                $madh=$_REQUEST['madh'];
-                donhangChiTiet($madh);
-              }else{
+            
               donhang();
-              } 
+               
               
               ?>
             </tbody>

@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<?php require_once(__DIR__. "/../function_trang_thai/trangThai.php");
-require_once(__DIR__. "/../function_trang_thai/xacnhandonhang.php");
-
-session_start();
-if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
-    header("Location: " . URL_LOGIN_ADMIN);
-    exit();
-}?>
+<?php require_once(__DIR__ . "/../function_kho_san_pham/khosp.php"); ?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trạng thái đơn hàng - Admin Dashboard</title>
+    <title>Kho sản phẩm</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
@@ -41,7 +34,6 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
               <i class="zmdi zmdi-shopping-cart"></i> Đơn hàng
             </a>
           </li>
-       
           <li>
             <a href="yeu-cau.php">
               <i class="zmdi zmdi-store"></i> Yêu cầu
@@ -51,37 +43,6 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
             <a href="trang-thai-don-hang.php">
               <i class="zmdi zmdi-assignment-check"></i> Trạng thái đơn hàng
             </a>
-          <li>
-            <a href="choxacnhan.php">
-              <i class="zmdi zmdi-time"></i> Chờ xác nhận
-            </a>
-          </li>
-         
-          <li>
-            <a href="cholayhang.php">
-              <i class="zmdi zmdi-truck"></i> Chờ lấy hàng
-            </a>
-          </li>
-          <li>
-            <a href="chogiaohang.php">
-              <i class="zmdi zmdi-truck"></i> Chờ giao hàng
-            </a>
-          </li>
-          <li>
-            <a href="dagiao.php">
-              <i class="zmdi zmdi-check"></i> Đã giao
-            </a>
-          </li>
-          <li>
-            <a href="dahuy.php">
-              <i class="zmdi zmdi-close"></i> Đã hủy
-            </a>
-          </li>
-          <li>
-            <a href="trahang.php">
-              <i class="zmdi zmdi-close"></i> trả hàng
-            </a>
-          </li>
           </li>
           <li>
             <a href="san-pham.php">
@@ -94,7 +55,9 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
             </a>
           </li>
           <li>
-            <a href="../function_login/logout.php"> <i class="zmdi zmdi-sign-in"></i> Đăng xuất </a>
+            <a href="logout.php">
+              <i class="zmdi zmdi-sign-in"></i> Đăng xuất
+            </a>
           </li>
         </ul>
       </div>
@@ -108,29 +71,62 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
             <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
           </div>
         </nav>
-     
-      <div class="container-fluid mt-4">
-        <h2>Danh sách đơn hàng</h2>
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped align-middle">
-            <thead>
-              <tr>
-                <th>Mã đơn hàng</th>
-                <th>Ngày đặt hàng</th>
-                <th>Địa chỉ giao hàng</th>
-                <th>Trạng thái</th>
-              </tr>
-            </thead>
-            <tbody>
-             <?php
-              DaGiao();
-             ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      </div>
+        <div class="container-fluid mt-4">
+          <h1>Sản phẩm</h1>
+          <p>Quản lý danh sách sản phẩm.</p>
+            <input id="search" class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm..." aria-label="Tìm kiếm" name="search">
+          <div class="table-responsive mt-4">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                 
+                  <th scope="col">Tên sản phẩm</th>
+                  <th scope="col">Màu sản phẩm</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Số lượng</th>
+                  <th scope="col">Thao tác</th>
+                  
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                  <?php khosp(); ?>
+              </tbody>
+              <tbody id="tbody-serach">
+               
+              </tbody>
+            </table>
+          </div>
+
+        
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(() => {
+  $(document).on("keyup ", "#search", function () {
+    let tensp = $(this).val().trim();
+    if (!tensp) {
+      $("#tbody").show();
+      $("#tbody-serach").hide();
+      $("#tbody-serach tr").remove();
+    } else {
+      $("#tbody").hide();
+      $("#tbody-serach").show();
+      $.ajax({
+        url: "../function_kho_san_pham/khosp.php",
+        type: "POST",
+        data: { tensp: tensp },
+        success: function (response) {
+          $("#tbody-serach tr").remove();
+          $("#tbody-serach").append(response);
+        },
+        error: function (xhr, status, error) {
+          alert("Lỗi AJAX: " + error);
+        },
+      });
+    }
+  });
+});
+  </script>
   </body>
 </html>

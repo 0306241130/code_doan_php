@@ -27,6 +27,12 @@ function sanpham(){
                   <td>'.$trangThai.'</td>
                   <td>'.$mausac.'</td>
                   <td>'.$size.'</td>
+                  <td>
+                    <div class="d-flex" style="gap: 8px;">
+                      <a href="../function_san_pham/xoa_san_pham.php?maspXoa='.$row['ma_san_pham'].'" class="btn btn-danger btn-sm pb-0">Xóa</a>
+                      <a href="capnhatsp.php?maspCapNhat='.$row['ma_san_pham'].'" class="btn btn-success btn-sm">Cập nhật</a>
+                    </div>
+                  </td>
                 </tr>';
     $mausac="";
     $size="";

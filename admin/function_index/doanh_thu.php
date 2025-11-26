@@ -7,12 +7,13 @@ function doanThu(){
     YEAR(dh.ngay_dat_hang) AS nam,
     MONTH(dh.ngay_dat_hang) AS thang,
     COUNT(DISTINCT dh.ma_don_hang) AS soLuongDon,
-    SUM(ct.gia) AS tongTien
+    SUM(ct.gia) AS tongTien,tt.*
 FROM don_hang dh
 JOIN chi_tiet_don_hang ct 
     ON dh.ma_don_hang = ct.ma_don_hang
+    JOIN thanh_toan tt ON ct.ma_thanh_toan=tt.ma_thanh_toan
 WHERE 
-    ct.trang_thai = 'đã giao'
+    dh.ma_trang_thai = 4 OR tt.trang_thai_thanh_toan='đã thanh toán'
     -- AND YEAR(dh.ngay_dat_hang) = YEAR(CURRENT_TIMESTAMP())
 GROUP BY 
     YEAR(dh.ngay_dat_hang),

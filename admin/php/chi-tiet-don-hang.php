@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<?php require_once(__DIR__. "/../fucntion_chitiet/chi_tiet_don_hang.php"); 
+<?php require_once(__DIR__. "/../fucntion_chitiet/chi_tiet_don_hang.php");
+require_once(__DIR__. "/../fucntion_chitiet/xoa-chi-tiet.php");
 if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
     header("Location: " . URL_LOGIN_ADMIN);
     exit();
@@ -37,11 +38,6 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
           <li>
             <a href="don-hang.php">
               <i class="zmdi zmdi-shopping-cart"></i> Đơn hàng
-            </a>
-          </li>
-          <li>
-            <a href="chi-tiet-don-hang.php">
-              <i class="zmdi zmdi-store"></i> Chi tiết đơn hàng
             </a>
           </li>
           <li>
@@ -85,18 +81,39 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
         <div class="table-responsive">
             <table class="table table-bordered table-hover align-middle">
                 <thead class="table-primary">
+                  <?php if(isset($_REQUEST['makh'])){ ?>
                     <tr>
-                        <th scope="col">Mã khách hàng</th>
-                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã người dùng</th>
+                        <th scope="col">Ngày đặt hàng</th>
+                        <th scope="col">Phí vận chuyển</th>
+                        <th scope="col">Số lượng</th>
                         <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Phương thức thanh toán</th>
                         <th scope="col">Size</th>
                         <th scope="col">Màu sắc</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Phương thức thanh toán</th>
                         <th scope="col">Trạng thái thanh toán</th>
-                        <th scope="col">số tiền cần thanh toán</th>
+                        <th scope="col">Địa chỉ giao hàng</th>
+                        <th scope="col">Thành tiền</th>
                     </tr>
+                    <?php } ?>
+                    <?php if(isset($_REQUEST['madh'])){ ?>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã người dùng</th>
+                        <th scope="col">Ngày đặt hàng</th>
+                        <th scope="col">Phí vận chuyển</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Phương thức thanh toán</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Màu sắc</th>
+                        <th scope="col">Trạng thái thanh toán</th>
+                        <th scope="col">Địa chỉ giao hàng</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Thao tác</th>
+                    </tr>
+                    <?php } ?>
                 </thead>
                 <tbody>
                    <?php
@@ -105,24 +122,47 @@ if (!isset($_SESSION['ADMIN']) || empty($_SESSION['ADMIN'])) {
                    $con = connect();
                    $makh = $_REQUEST['makh'];
                    // Truy vấn lấy ra chi tiết đơn hàng của một khách hàng
-                   $reslut=mysqli_query($con,"SELECT dh.ma_nguoi_dung, dh.ma_don_hang,tensp,kich_co,so_luong,mau_sac,trang_thai,tt.phuong_thuc_thanh_toan,tt.trang_thai_thanh_toan,tt.so_tien_can_thanh_toan FROM chi_tiet_don_hang ct JOIN thanh_toan tt on ct.ma_thanh_toan=tt.ma_thanh_toan JOIN don_hang dh ON dh.ma_don_hang=ct.ma_don_hang WHERE dh.ma_nguoi_dung=".$makh."  ;  ");
-                   while($row=mysqli_fetch_assoc($reslut)){
-                       echo'<tr>       
-                                       <td>'.$row['ma_nguoi_dung'].'</td>
-                                       <td>'.$row['ma_don_hang'].'</td>
-                                       <td>'.$row['tensp'].'</td>
-                                       <td>'.$row['kich_co'].'</td>
-                                       <td>'.$row['mau_sac'].'</td>
-                                       <td>'.$row['so_luong'].'</td>
-                                       <td>'.$row['trang_thai'].'</td>
-                                       <td>'.$row['phuong_thuc_thanh_toan'].'</td>
-                                       <td>'.$row['trang_thai_thanh_toan'].'</td>
-                                       <td>'.number_format( $row['so_tien_can_thanh_toan'],0,"",".").'đ</td>
-                                   </tr>';
+                   // Viết truy vấn lấy các cột ở trên:
+                   $query = "SELECT 
+                       ct.ma_chi_tiet,
+                       dh.ma_nguoi_dung, 
+                       dh.ma_don_hang, 
+                       dh.ngay_dat_hang,
+                       dh.phi_van_chuyen,
+                       ct.so_luong, 
+                       ct.tensp, 
+                       tt.phuong_thuc_thanh_toan, 
+                       ct.kich_co, 
+                       ct.mau_sac, 
+                       tt.trang_thai_thanh_toan, 
+                       dh.dia_chi_giao_hang, 
+                       ct.gia
+                   FROM chi_tiet_don_hang ct
+                   JOIN thanh_toan tt ON ct.ma_thanh_toan = tt.ma_thanh_toan
+                   JOIN don_hang dh ON dh.ma_don_hang = ct.ma_don_hang 
+                   WHERE dh.ma_nguoi_dung = ".$makh;
+                   $reslut = mysqli_query($con, $query);
+                   $i = 0;
+                   while($row = mysqli_fetch_assoc($reslut)){
+                       echo '<tr>
+                               <td>'.(++$i).'</td>
+                               <td>'.$row['ma_nguoi_dung'].'</td>
+                               <td>'.$row['ngay_dat_hang'].'</td>
+                               <td>'.number_format($row['phi_van_chuyen'],0,"",".") .'đ</td>
+                               <td>'.$row['so_luong'].'</td>
+                               <td>'.$row['tensp'].'</td>
+                               <td>'.$row['phuong_thuc_thanh_toan'].'</td>
+                               <td>'.$row['kich_co'].'</td>
+                               <td>'.$row['mau_sac'].'</td>
+                               <td>'.$row['trang_thai_thanh_toan'].'</td>
+                               <td>'.$row['dia_chi_giao_hang'].'</td>
+                               <td>'.number_format($row['gia'],0,"",".").'đ</td>
+                           </tr>';
                    }
-                   } else {
-                       chiTiet();
-                   }
+                   } else  if(isset($_REQUEST['madh'])){
+                    $madh=$_REQUEST['madh'];
+                    donhangChiTiet($madh);
+                  }
 
                    
                    ?>

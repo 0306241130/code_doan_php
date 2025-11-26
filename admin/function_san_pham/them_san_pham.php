@@ -9,6 +9,7 @@ $gia_ban = isset($_POST['gia_ban']) ? $_POST['gia_ban'] : '';
 $giam_gia = isset($_POST['giam_gia']) ? $_POST['giam_gia'] : '';
 $mau_san_pham = isset($_POST['mau_san_pham']) ? $_POST['mau_san_pham'] : '';
 $size = isset($_POST['size']) ? $_POST['size'] : '';
+$so_luong_san_pham = isset($_POST['so_luong_san_pham']) ? $_POST['so_luong_san_pham'] : '';
 
 $result=mysqli_query($con,"SELECT MAX(IFNULL(ma_san_pham,0)) AS ma_san_pham FROM san_pham");
 $row=mysqli_fetch_assoc($result);
@@ -16,6 +17,7 @@ $ma_san_pham=$row['ma_san_pham']+1;
 
 $mau_san_pham = explode(",", $mau_san_pham);
 $size=explode(",",$size);
+$soluong=explode(",",$so_luong_san_pham);
 
 
 
@@ -26,6 +28,12 @@ foreach($mau_san_pham AS $value){
 }
 foreach($size AS $value){
     mysqli_query($con,"INSERT INTO size_san_pham VALUES(".$ma_san_pham.",".(int)$value.")");
+}
+
+for($i=0;$i<count($soluong);$i++){
+    for($j=0;$j<count($soluong);$j++){
+    mysqli_query($con,"INSERT INTO so_luong_ton VALUES(".$ma_san_pham.",'".$mau_san_pham[$j]."',".$size[$i].",".$soluong[$i].")");
+    }
 }
 
 

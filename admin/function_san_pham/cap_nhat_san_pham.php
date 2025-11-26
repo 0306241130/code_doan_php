@@ -72,3 +72,34 @@ header("Location: ". URL_ADMIN . "san-pham.php");
 exit();
 } 
 ?>
+<?php
+if(isset($_REQUEST['maspCapNhat'])){
+    $con=connect();
+    $size="";
+    $mau="";
+    $masp=$_REQUEST['maspCapNhat'];
+    $reslut=mysqli_query($con,"SELECT * FROM mau_san_pham WHERE ma_san_pham=$masp");
+    $mangMau = [];
+    $mangSize=[];
+    while ($row = mysqli_fetch_assoc($reslut)) {
+        $mangMau[] = $row['mau_sac'];
+    }
+    $mau = implode(",", $mangMau);
+    
+
+    $reslut1=mysqli_query($con,"SELECT * FROM size_san_pham WHERE ma_san_pham=$masp");
+    while($row1=mysqli_fetch_assoc($reslut1)){
+        $mangSize[]=$row1['size'];
+    }
+    $size=implode(",",$mangSize);
+
+    $reslut2=mysqli_query($con,"SELECT * FROM san_pham WHERE ma_san_pham=$masp");
+    $row2=mysqli_fetch_assoc($reslut2);
+    $tenSanPham=$row2['ten_san_pham'];
+    $moTa=$row2['mo_ta'];
+    $maThuongHieu=$row2['ma_thuong_hieu'];
+    $giaBan=$row2['gia_ban'];
+    $giamGia=$row2['giam_gia'];
+    $trangThai=$row2['trang_thai_san_pham'];
+}
+?>

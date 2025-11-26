@@ -34,11 +34,7 @@
               <i class="zmdi zmdi-shopping-cart"></i> Đơn hàng
             </a>
           </li>
-          <li>
-            <a href="chi-tiet-don-hang.php">
-              <i class="zmdi zmdi-store"></i> Chi tiết đơn hàng
-            </a>
-          </li>
+       
           <li>
             <a href="yeu-cau.php">
               <i class="zmdi zmdi-store"></i> Yêu cầu
@@ -48,6 +44,37 @@
             <a href="trang-thai-don-hang.php">
               <i class="zmdi zmdi-assignment-check"></i> Trạng thái đơn hàng
             </a>
+          <li>
+            <a href="choxacnhan.php">
+              <i class="zmdi zmdi-time"></i> Chờ xác nhận
+            </a>
+          </li>
+          
+          <li>
+            <a href="cholayhang.php">
+              <i class="zmdi zmdi-truck"></i> Chờ lấy hàng
+            </a>
+          </li>
+          <li>
+            <a href="chogiaohang.php">
+              <i class="zmdi zmdi-truck"></i> Chờ giao hàng
+            </a>
+          </li>
+          <li>
+            <a href="dagiao.php">
+              <i class="zmdi zmdi-check"></i> Đã giao
+            </a>
+          </li>
+          <li>
+            <a href="dahuy.php">
+              <i class="zmdi zmdi-close"></i> Đã hủy
+            </a>
+          </li>
+          <li>
+            <a href="trahang.php">
+              <i class="zmdi zmdi-close"></i> trả hàng
+            </a>
+          </li>
           </li>
           <li>
             <a href="san-pham.php">
@@ -74,19 +101,7 @@
             <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
           </div>
         </nav>
-        <div class="container-fluid mt-4">
-          <h1>Trạng thái đơn hàng</h1>
-          <label for="trangThaiDonHang" class="form-label">Chọn trạng thái đơn hàng:</label>
-          <select class="form-select" id="trangThaiDonHang" name="trang_thai" onchange="location = this.value;">
-          <option value="trahang.php">Trả hàng</option>
-                <option value="trang-thai-don-hang.php">Chờ xác nhận</option>
-                <option value="cholayhang.php">Chờ lấy hàng</option>
-                <option value="chogiaohang.php">Chờ giao hàng</option>
-                <option value="dagiao.php">Đã giao</option>
-                
-                <option value="dahuy.php">Đã hủy</option>
-              </select>
-        </div>
+     
       <div class="container-fluid mt-4">
         <h2>Danh sách đơn hàng</h2>
         <div class="table-responsive">
