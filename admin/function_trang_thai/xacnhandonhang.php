@@ -12,6 +12,9 @@ if(isset($_REQUEST['madhChoLayHang'])){
 if(isset($_REQUEST['madhChoGiaoHang'])){
     $madhChoGiaoHang=$_REQUEST['madhChoGiaoHang'];
     mysqli_query($con,"UPDATE don_hang SET ma_trang_thai=4 WHERE ma_don_hang=$madhChoGiaoHang");
+
+    mysqli_query($con,"UPDATE thanh_toan tt JOIN chi_tiet_don_hang ct ON ct.ma_thanh_toan=tt.ma_thanh_toan
+                        JOIN don_hang dh ON ct.ma_don_hang=dh.ma_don_hang SET trang_thai_thanh_toan='đã thanh toán'");
 }
 if(isset($_REQUEST['madhHuyHang'])){
     $madhHuyHang=$_REQUEST['madhHuyHang'];

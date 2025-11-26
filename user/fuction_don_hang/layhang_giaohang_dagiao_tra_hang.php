@@ -98,7 +98,7 @@ function GiaoHang(){
 }
 function TraHang(){
     global $con;
-    $result=mysqli_query($con,"SELECT * FROM chi_tiet_don_hang ctdh JOIN don_hang dh ON ctdh.ma_don_hang=dh.ma_don_hang WHERE ma_nguoi_dung=".$_SESSION['MA_USER']." AND dh.ma_trang_thai=5");
+    $result=mysqli_query($con,"SELECT * FROM chi_tiet_don_hang ctdh JOIN don_hang dh ON ctdh.ma_don_hang=dh.ma_don_hang JOIN hoan_tra ht ON ht.ma_chi_tiet=ctdh.ma_chi_tiet WHERE ma_nguoi_dung=".$_SESSION['MA_USER']." ");
      while($row=mysqli_fetch_assoc($result)){
         echo'<tr>
                     <td class="text-center">
