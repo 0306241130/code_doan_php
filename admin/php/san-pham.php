@@ -105,6 +105,11 @@
                
               </tbody>
             </table>
+          <div class="mb-3">
+            <a href="themsp.php" class="btn btn-success">
+              <i class="zmdi zmdi-plus"></i> Thêm sản phẩm
+            </a>
+          </div>
           </div>
 
         
