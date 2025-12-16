@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"&&isset($_POST['edit_card'])){
     $result1=mysqli_query($con,"SELECT * FROM so_luong_ton WHERE ma_san_pham=".$masp." AND mau_sac='".$Color."' AND size=".$Size."");
     $row1=mysqli_fetch_assoc($result1);
     if($row1['soluong']<$soLuong){
-        echo'<div class="alert alert-danger text-center" style="margin-top: 2rem; margin-bottom:0rem;">Sản phẩm đã hết hàng, xin vui lòng chọn màu hoặc size khác.</div>';
+        echo'<div class="alert alert-danger text-center" style="margin-top: 5rem; margin-bottom:0rem;">Sản phẩm đã hết hàng, xin vui lòng chọn màu hoặc size khác.</div>';
     }else{
     mysqli_query($con,"UPDATE gio_hang SET so_luong='".$soLuong."',kich_co='".$Size."',mau_sac='".$Color."',gia=".$row['gia_giam']*$soLuong." WHERE ma_san_pham='".$masp."' AND ma_nguoi_dung='".$_SESSION['MA_USER']."'");
     header("Location: " . URL ."giohang.php");

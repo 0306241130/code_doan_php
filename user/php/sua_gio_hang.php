@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-session_start();
+
 require_once(__DIR__. "/../../difen_connect_php/connect.php");
 require_once(__DIR__ . "/../function_gio_hang/sua_gio_hang.php");
 require_once(__DIR__. "/../function_gio_hang/dem_san_pham.php");
